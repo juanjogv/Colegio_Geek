@@ -1,0 +1,42 @@
+.App {
+  font-family: sans-serif;
+}
+
+.Llogo{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  width:220px;  
+}
+
+div .pg-cont{
+  height: 100%;
+}
+
+div .row{
+  height: 60vh;
+  min-height:600px ; 
+  text-align: center;
+  position: relative;
+}
+
+
+.form-color {
+  background-color: var(--Cgrey);
+}
+
+/* form {
+  position: absolute;
+  /* top: 50%; */
+  /* transform: translateY(-50%); 
+} */
+
+.btn-color {
+  background-color: var(--Cgreen);
+}
+
+.formL, .btn-color{
+  color: white;
+  font-size:22px;
+  font-weight: 400;  
+}
