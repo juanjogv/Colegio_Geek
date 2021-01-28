@@ -12,6 +12,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(require('./routes/index.routes'))
+app.use(require('./routes/index.routes'));
+app.use(require('./routes/autentication.routes'));
 
 module.exports = app;
