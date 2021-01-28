@@ -1,4 +1,4 @@
-.App {
+.App{
   font-family: sans-serif;
 }
 
@@ -21,17 +21,16 @@ div .row{
 }
 
 
-.form-color {
+.form-color{
   background-color: var(--Cgrey);
 }
 
-/* form {
-  position: absolute;
-  /* top: 50%; */
-  /* transform: translateY(-50%); 
-} */
+p{
+  color:rgb(216, 218, 217);
+  font-weight: bold;
+}
 
-.btn-color {
+.btn-color{
   background-color: var(--Cgreen);
 }
 
