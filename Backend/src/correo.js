@@ -15,10 +15,5 @@ const mailOptions = {
   text: 'Bienvenido a nuestra aplicacion'
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-	console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+
+module.exports = transporter, mailOptions
