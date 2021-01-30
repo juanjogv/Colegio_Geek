@@ -1,6 +1,7 @@
 CREATE TYPE TIPO_DOCUMENTO AS ENUM('TI','NUIM','CC');
 CREATE TYPE ROL AS ENUM('ESTUDIANTE','DOCENTE','ADMINISTRATIVO');
 CREATE TYPE GENERO AS ENUM('MASCULINO','FEMENINO','OTRO');
+CREATE TYPE CORREO_VALIDADO AS ENUM('SI','NO');
 CREATE TABLE usuarios(
   id_usuario serial NOT NULL PRIMARY KEY,
 	rol ROL,
@@ -17,8 +18,14 @@ CREATE TABLE usuarios(
   correo_electronico varchar(30),
   telefono_celular varchar(20),
   foto_estudiante varchar(500),
-  copia_documento varchar(500));
+  copia_documento varchar(500)
+  pass_usuario varchar(300)
+);
 
+	CREATE TABLE ultimo_usuario(
+	  ano varchar(20),
+		identificador varchar(20)
+	);
 
 
 CREATE TYPE JORNADA AS ENUM('mañana','tarde');
