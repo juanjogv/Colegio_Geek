@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-  const correo 
+  const correo =''
   const enlace = "www.facebook.com"+correo
 
   const mailOptions = {

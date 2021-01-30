@@ -47,15 +47,18 @@ export default function Form(props) {
   
   const fSend = (data) => {     
     console.log(data);
-    //console.log(data.email, data.password);
+    console.log(data.email, data.password);
     // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/login", {
-    // Axios.post("http://localhost:3001/api/login", {
-    //   userEmail: userEmail,
-    //   // password: sha1(password), 
-    //   password: password,      
-    // }).then((response) => {
-    //   console.log(response.data);
-    // });
+    Axios.post("http://localhost:8080/login", {
+      codigo_usuario: data.email,
+      // password: sha1(password), 
+      contrasena: data.password,      
+    }).then((response) => {
+      console.log(response.data);
+    });
+
+
+
   }
 
   
@@ -121,7 +124,7 @@ export default function Form(props) {
 
   return (    
     <div className="container border form-color p-5">
-      <form onSubmit={handleSubmit(data => console.log(data))} className="col-md-10 mx-auto align-self-center">
+      <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
         {inputMaker(camps,inTypes,arrEr,vals,errMes)}          
         <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
       </form>
