@@ -6,12 +6,12 @@ import Form from "../components/Form";
 import logo from "../images/logo.png";
 
 
-const Login=()=>{
-  const camposInputs=[{correo_electronico:'Correo'},{contrasena:'Conatraseña'}];
-  const inputType=['text','password'];
-  const validation=[{required: true,pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/},{required: true}];
-  const errMessage=['Ingrese un correo valido','Ingrese contraseña'];
-
+const GroupRegister=()=>{
+  const camposInputs=[{codigo_grupo:'Código grupo'}];
+  const inputType=['text'];
+  const jor={jornada:['MAÑANA','TARDE']};
+  const validation=[{required: true}];
+  const errMessage=['Ingrese código del grupo'];
   return (
     <div className="row align-items-center">
       <div className="col-12">
@@ -19,18 +19,18 @@ const Login=()=>{
       </div>
       <div className="col-12">
         <Form
-          page="1"
+          page="4"
           camps={camposInputs}
           inTypes={inputType}
           vals={validation}
           errMes={errMessage}
-          endpoint="/login"
+          j={jor}
+          endpoint="/group-register"
           method="post"
-          btnText="Login"
+          btnText="Register"
         />
       </div>
     </div>
   );
 }
-
-export default Login;
+export default GroupRegister;
