@@ -10,17 +10,6 @@ const Form=(props)=>{
   const { register,errors, handleSubmit } = useForm();
 
 
-  const fRegister = () => {
-    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/register", {      
-    Axios.post("http://localhost:3001/api/register", {
-      userEmail: userEmailReg,
-     // password: sha1(passwordReg),  
-       password: passwordReg,       
-  
-    }).then((response) => {
-      console.log(response.data);
-    });
-  }
   
   
   const fSend = (data) => {    
