@@ -4,13 +4,15 @@ const correo = Router()
 const transporter = require('../correo')
 const pool = require('../database')
 
-correo.get('/mail-autentication',async (req,res)=>{
+correo.post('/',(req,res)=>{
+  const correo =''
+  const enlace = "www.facebook.com"+correo
 
   const mailOptions = {
     from: 'colegio.academia.geek@gmail.com',
     to: 'pablo42r@gmail.com',
     subject: 'Invoice',
-    text: 'Bienvenido a nuestra aplicacion'
+    html: '<a href='+enlace+'>hola</a>'
   };
 
   transporter.sendMail(mailOptions, function(error, info){
@@ -21,7 +23,5 @@ correo.get('/mail-autentication',async (req,res)=>{
     }
   });
 })
-
-correo.get('/autentication',(req,res)=>{})
 
 module.exports = correo
