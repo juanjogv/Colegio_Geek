@@ -6,9 +6,10 @@ const helpers = require('../lib/helpers');
 
 router.post('/signin', async (req, res) => {
     console.log(req.body)
-    const {rol, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, ciudad_residencia, 
-        telefono_residencia, correo_electronico, telefono_celular,foto_estudiante, copia_documento} = req.body;
-
+    const {rol, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento, ciudad_residencia, 
+        direccion_residencia, telefono_residencia, correo_electronico, telefono_celular,foto_estudiante, copia_documento} = req.body;
+        console.log('holis',rol, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, ciudad_residencia, 
+        direccion_residencia, telefono_residencia, correo_electronico, telefono_celular,foto_estudiante, copia_documento);
     const pass_usuario = await helpers.encryptPassword(documento_usuario);
     const codigo_usuario = await helpers.createCodigoUsuario();
 
@@ -40,7 +41,6 @@ router.get('/login/:codigo_usuario/:contrasena', async (req, res) => {
 });
 
 
-
 router.post('/login', async (req, res) => {
     const { correo_electronico, contrasena } = req.body;
     console.log(correo_electronico, contrasena);
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
     if (rows.rows.length > 0) {
 
         const savedpass = rows.rows[0].contrasena_usuario;
-        const validPass = await helpers.matchPassword(userpass, savedpass);
+        const validPass = await helpers.matchPassword(contrasena, savedpass);
         rows.push({ validPass: validPass })
         res.json(rows);
 
@@ -58,20 +58,5 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post('/group-register', async (req, res) => {
-    const { correo_electronico, contrasena } = req.body;
-    console.log(correo_electronico, contrasena);
-    const rows = await pool.query(`SELECT * FROM usuarios WHERE correo_electronico = '${correo_electronico}'`);
-
-    if (rows.rows.length > 0) {
-
-        const savedpass = rows.rows[0].contrasena_usuario;
-        const validPass = await helpers.matchPassword(userpass, savedpass);
-        rows.push({ validPass: validPass })
-        res.json(rows);
-
-    }
-
-});
 
 module.exports = router;
