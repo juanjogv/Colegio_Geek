@@ -24,15 +24,14 @@ router.post('/signin', async (req, res) => {
 
 });
 
-router.get('/login/:codigo_usuario/:contrasena', async (req, res) => {
-    const { codigo_usuario, contrasena } = req.body;
+router.post('/login', async (req, res) => {
+    const { correo_electronico, pass } = req.body;
 
-    const rows = await pool.query(`SELECT * FROM usuarios WHERE codigo_usuario = '${codigo_usuario}'`);
+    const { rows } = await pool.query(`SELECT * FROM usuarios WHERE correo_electronico = '${correo_electronico}'`);
+    if (rows.length > 0) {
 
-    if (rows.rows.length > 0) {
-
-        const savedpass = rows.rows[0].contrasena_usuario;
-        const validPass = await helpers.matchPassword(userpass, savedpass);
+        const savedpass = rows[0].pass_usuario;
+        const validPass = await helpers.matchPassword(pass, savedpass);
         rows.push({ validPass: validPass })
         res.json(rows);
 
