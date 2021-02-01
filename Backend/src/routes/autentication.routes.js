@@ -22,14 +22,29 @@ router.post('/signin', async (req, res) => {
 
 });
 
-router.post('/login', async (req, res) => {
-    const { correo_electronico, pass } = req.body;
 
+// router.get('/login/:codigo_usuario/:contrasena', async (req, res) => {
+//     const { correo_electronico, contrasena } = req.body;
+//     console.log(correo_electronico, contrasena);
+//     const rows = await pool.query(`SELECT * FROM usuarios WHERE correo_electronico = '${correo_electronico}'`);
+
+//     if (rows.rows.length > 0) {
+
+//         const savedpass = rows.rows[0].contrasena_usuario;
+//         const validPass = await helpers.matchPassword(userpass, savedpass);
+//         rows.push({ validPass: validPass })
+//         res.json(rows);
+//     }
+// });
+
+
+router.post('/login', async (req, res) => {
+    const { correo_electronico, contrasena_usuario } = req.body;
     const { rows } = await pool.query(`SELECT * FROM usuarios WHERE correo_electronico = '${correo_electronico}'`);
     if (rows.length > 0) {
 
         const savedpass = rows[0].pass_usuario;
-        const validPass = await helpers.matchPassword(pass, savedpass);
+        const validPass = await helpers.matchPassword(contrasena_usuario, savedpass);
         rows.push({ validPass: validPass })
         res.json(rows);
 
