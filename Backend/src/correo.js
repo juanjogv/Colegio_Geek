@@ -8,12 +8,5 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const mailOptions = {
-  from: 'colegio.academia.geek@gmail.com',
-  to: 'pablo42r@gmail.com',
-  subject: 'Invoice',
-  text: 'Bienvenido a nuestra aplicacion'
-};
 
-
-module.exports = transporter, mailOptions
+module.exports = transporter

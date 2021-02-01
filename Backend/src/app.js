@@ -17,10 +17,15 @@ const multerMid = multer({
 app.set('port', port);
 
 app.use(morgan('dev'));
+<<<<<<< HEAD
 app.use(multerMid.single('file'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors());
+=======
+app.use(bodyParser.json());
+app.use(cors('*'));
+>>>>>>> b07dcda6e287288bfe78fe8423853a468bfe9dce
 
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/autentication.routes'));

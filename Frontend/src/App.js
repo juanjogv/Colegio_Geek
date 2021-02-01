@@ -5,12 +5,15 @@ import { AnimatedSwitch } from "react-router-transition";
 
 import Particles from "./Canvas";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import './css/App.css';
+import UserRegister from "./pages/UserRegister";
+import GroupRegister from "./pages/GroupRegister";
+import SubjectRegister from "./pages/SubjectRegister";
+import StudentBoard from "./pages/StudentBoard";
+import './css/App.scss';
 
 const App = () => {
   return (
-    <div className="container pg-cont">
+    <div className="container-fluid pg-cont">
       <div className="canvas">
         <Particles />
       </div>
@@ -22,35 +25,13 @@ const App = () => {
           className="switch-wrapper"
         >
           <Route exact path="/" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/register" component={UserRegister} />
+          <Route path="/group-register" component={GroupRegister} />
+          <Route path="/subject-register" component={SubjectRegister} />
+          <Route path="/student-board" component={StudentBoard} />
         </AnimatedSwitch>
       </Router>
     </div>
   );
 };
 export default App;
-
-
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

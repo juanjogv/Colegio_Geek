@@ -1,139 +1,161 @@
 import React, {useState} from "react";
 import Axios from "axios";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 
-const validationSchema = yup.object().shape({
-  name: yup.string().required("Ingrese nombre").matches(/^[A-Za-záéíóúÁÉÍÓÚ ,.'-]+$/i, 'Nombre no valido'),
-  lastName: yup.string().required("Ingrese nombre").matches(/^[A-Za-záéíóúÁÉÍÓÚ ,.'-]+$/i, 'Apellido no valido'),
-  birthday:yup.string(),
-  direction:yup.string(),
-  city:yup.string(),
-  adress:yup.string().matches(/^[0-9A-Za-záéíóúÁÉÍÓÚ #,.'-]+$/i, 'Dirección no valida'),
-  phNum:yup.string().matches(/^[0-9]+$/i, 'Número telefónico no valido').min(7,'Número telefónico no valido'),
-  celNum:yup.string().matches(/^[0-9]+$/i, 'Número celular no valido').min(10,'min 10'),
-  email: yup.string().email('Se debe ingresar un correo valido').required("Ingrese un correo"),
-  password: yup.string().required("Ingrese contraseña").min(6,'la contraseña es min de 6 caracteres')
+const Form=(props)=>{
+  const {page,camps,inTypes,btnText,vals,errMes,endpoint} = props;
+  let arrEr=[];
+
+  const { register,errors, handleSubmit } = useForm();
+
+
   
-});
-
-const handleError=(error)=>{
-  return error.message;
-}
-
-export default function Form(props) {
-  // const [emailReg, setUEmailReg] = useState("");
-  // const [passwordReg, setPasswordReg] = useState("");
-
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues: { email: "", password: "" }
-  });
-
-  const fRegister = () => {
-    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/register", {      
-    Axios.post("http://localhost:3001/api/register", {
-      userEmail: userEmailReg,
-     // password: sha1(passwordReg),  
-       password: passwordReg,       
   
-    }).then((response) => {
+  const fSend = (data) => {    
+    const {endpoint}=props;
+    console.log(data);
+    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/login", {
+    Axios.post(`http://localhost:8080${endpoint}`,data).then((response) => {
       console.log(response.data);
     });
   }
+
+  const inputMaker=(camps,inTypes,arrEr,vals,errMes)=>{
+    return camps.map((camp,index)=>{    
+      return(
+        <div className="form-group" key={index}>
+          <label className="formL" htmlFor={Object.keys(camp)}>{Object.values(camp)}</label>
+          <input
+            className="form-control"
+            id={Object.keys(camp)}
+            name={Object.keys(camp)}
+            type={inTypes[index]}
+            placeholder={Object.values(camp)}
+            ref={register(vals[index])}
+          />
+          <p className="textErr">{arrEr[index] && errMes[index]}</p>
+        </div>
+      );
+    });
+  }
+
+  const radioMaker=(name,elements)=>{
+    return elements.map((element,index)=>{
+      return(
+        <div className="form-radio" key={index} id={element+index}>
+          <input 
+            className="form-radio-input" 
+            type="radio" name={name[0]} 
+            value={element}
+            ref={register({ required: true })}
+          />
+          <label className="form-radio-label" htmlFor={element+index}>
+            {element}
+          </label>
+        </div>
+      );
+    });
+  }
+
+  const checkMaker=(name,elements)=>{
+    return elements.map((element,index)=>{
+      return(
+        <div className="form-checkbox" key={index} id={element+index}>
+          <input 
+            className="form-checkbox-input" 
+            type="checkbox" name={name} 
+            value={element}
+            ref={register({ required: true })}
+          />
+          <label className="form-checkbox-label" htmlFor={element+index}>
+            {element}
+          </label>
+        </div>
+      );
+    });
+  }
+
+  const inFileMaker=(files)=>{
+    return files.map((file,index)=>{
+      return(
+        <input ref={register} type="file" name={file} key={index} />
+      );
+    });
+  }
+
   
-  const fLogin = (data) => {     
-    console.log(data);
-    console.log(data.email, data.password);
-    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/login", {
-    // Axios.post("http://localhost:3001/api/login", {
-    //   userEmail: userEmail,
-    //   // password: sha1(password), 
-    //   password: password,      
-    // }).then((response) => {
-    //   console.log(response.data);
-    // });
+  if(page=="1"){
+    arrEr=[errors.correo_electronico, errors.contrasena];
+    return (    
+      <div className="container border form-color p-5">
+        <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}          
+          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+        </form>
+      </div>
+      );
   }
 
-  if(props.page=="2"){
-    const {camps,inTypes} = props;
-    const arrEr=[
-      errors.name,errors.lastName,errors.birthday,errors.adress,errors.city,
-      errors.phNum,errors.celNum,errors.email,errors.password
+  else if(page=="2"){
+    const {uTypes,idT,s,files} = props;
+    arrEr=[
+      errors.nombre_usuario,errors.apellido_usuario,errors.fecha_nacimiento,errors.direccion_residencia,
+      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico,
+      errors.contrasena
     ];
-
     return (    
-        <div className="container border form-color p-5">
-        <form onSubmit={handleSubmit(fLogin)} className="col-md-10 mx-auto align-self-center">
-          {camps.map((camp,index)=>{    
-            return(
-              <div className="form-group" key={index}>
-                <label className="formL" htmlFor={Object.keys(camp)}>{Object.values(camp)}</label>
-                <input
-                  className="form-control"
-                  id={Object.keys(camp)}
-                  name={Object.keys(camp)}
-                  type={inTypes[index]}
-                  placeholder={Object.values(camp)}
-                  ref={register}
-                  error={arrEr[index]} 
-                />
-                <p className="textErr">{arrEr[index] && `${handleError(arrEr[index])}`}</p>
-              </div>
-            );
-          })}      
-          <button className="btn btn-color col-md-12 mt-5">
-            Login
-          </button>
-        </form>
-      </div>
-      );
-  }
-  else if(props.page=="1"){
-    return (    
-        <div className="container border form-color p-5">
-        <form onSubmit={handleSubmit(fLogin)} className="col-md-10 mx-auto align-self-center">
-          <div className="form-group">
-            <label className="formL" htmlFor="idEmail">Correo Electrónico</label>
-            <input
-              //type="email"
-              className="form-control"
-              id="idEmail"
-              name="email"
-              placeholder="Email"
-              ref={register}
-              error={errors.email}
-            />
-            <p className="textErr">{errors.email && `${errors.email.message}` }</p>
+      <div className="container border form-color p-5">
+        <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}            
+          <div className="d-flex justify-content-center">
+            {radioMaker(Object.keys(idT),idT.tipo_documento)}
+          </div> 
+          <div className="d-flex justify-content-center">
+            {radioMaker(Object.keys(s),s.genero)}
           </div>
-          <div className="form-group">
-            <label className="formL" htmlFor="idPass">Password</label>
-            <input 
-              type="password"
-              className="form-control"
-              id="idPass"
-              name="password"
-              type="password"
-              placeholder="password"
-              ref={register}
-              error={errors.password} 
-            />
-            <p className="textErr">
-            {/* <p className="textErr" onError={handleError(error)}> */}
-              {errors.password && `${errors.password.message}`}
-            </p>
-          </div>            
-          <button className="btn btn-color col-md-12 mt-5">
-            Login
-          </button>
+          <div className="d-flex justify-content-center">
+            {radioMaker(Object.keys(uTypes),uTypes.rol)}
+          </div>
+            {inFileMaker(files)}
+          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>
       );
   }
+  
+  else if(page=="3"){
+    const {grA} = props;
+    arrEr=[errors.codigo_materia, errors.nombre_materia];
+    return (    
+      <div className="container border form-color p-5">
+        <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
+          <div className="d-flex justify-content-center">
+            {checkMaker('grupos',grA)}
+          </div>   
+          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+        </form>
+      </div>
+      );
+  }
+
+  else if(page=="4"){
+    const {j} = props;
+    arrEr=[errors.codigo_grupo];
+    return (    
+      <div className="container border form-color p-5">
+        <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
+          <div className="d-flex justify-content-center">
+            {radioMaker(Object.keys(j),j.jornada)}
+          </div>   
+          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+        </form>
+      </div>
+      );
+  }
+  
 }
+
+export default Form;
