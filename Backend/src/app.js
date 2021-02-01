@@ -6,8 +6,8 @@ const morgan = require('morgan')
 const { port } = require('./config');
 
 const app = express();
-app.use(cors({origin: 'http://localhost:3000',credentials: true})); 
-// app.use(cors({origin: '*'}));
+// app.use(cors({origin: 'http://localhost:3000',credentials: true})); 
+app.use(cors({origin: '*'}));
 
 const multerMid = multer({
     storage: multer.memoryStorage(),
