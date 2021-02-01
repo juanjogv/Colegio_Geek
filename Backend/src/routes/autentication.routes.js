@@ -47,9 +47,7 @@ router.post('/login', async (req, res) => {
         const validPass = await helpers.matchPassword(contrasena_usuario, savedpass);
         rows.push({ validPass: validPass })
         res.json(rows);
-
     }
-
 });
 
 
