@@ -8,8 +8,6 @@ router.post('/signin', async (req, res) => {
     console.log(req.body)
     const {rol, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento, ciudad_residencia, 
         direccion_residencia, telefono_residencia, correo_electronico, telefono_celular,foto_estudiante, copia_documento} = req.body;
-        console.log('holis',rol, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, ciudad_residencia, 
-        direccion_residencia, telefono_residencia, correo_electronico, telefono_celular,foto_estudiante, copia_documento);
     const pass_usuario = await helpers.encryptPassword(documento_usuario);
     const codigo_usuario = await helpers.createCodigoUsuario();
 
