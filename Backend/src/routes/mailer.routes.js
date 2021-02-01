@@ -1,27 +1,15 @@
-const {Router} = require('express')
-const format = require('pg-format')
+const { Router } = require('express')
 const correo = Router()
-const transporter = require('../correo')
-const pool = require('../database')
+const { transporter, mailOptions } = require('../correo')
 
-correo.get('/mail-autentication',async (req,res)=>{
-
-  const mailOptions = {
-    from: 'colegio.academia.geek@gmail.com',
-    to: 'pablo42r@gmail.com',
-    subject: 'Invoice',
-    text: 'Bienvenido a nuestra aplicacion'
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
+correo.get('/mail-autentication', (req, res) => {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-	    console.log(error);
-    }else {
-       console.log('Email sent: ' + info.response);
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
     }
   });
 })
-
-correo.get('/autentication',(req,res)=>{})
 
 module.exports = correo

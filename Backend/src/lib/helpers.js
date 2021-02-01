@@ -19,21 +19,39 @@ helpers.matchPassword = async (password, savedPassword) => {
 };
 
 helpers.createCodigoUsuario = async () => {
-    var year = new Date().getFullYear()
+    var year = new Date().getFullYear();
     let checker = await pool.query('SELECT * FROM ultimo_usuario');
 
     if (checker.rows[0].year != year) {
-        await pool.query(`UPDATE ultimo_usuario SET year = '${year}', identificador = '${0}'`)
+        await pool.query(`UPDATE ultimo_usuario SET year = '${year}', identificador = '${0}'`);
     }
 
     let id = await pool.query('SELECT (SELECT identificador FROM ultimo_usuario) + 1 AS identificador;');
 
-    await pool.query(`UPDATE ultimo_usuario SET identificador = '${id.rows[0]['identificador']}'`)
+    await pool.query(`UPDATE ultimo_usuario SET identificador = '${id.rows[0]['identificador']}'`);
 
     const codigo_usuario = year + ('00' + id.rows[0]['identificador']).slice(-3);
-    console.log(codigo_usuario);
 
     return codigo_usuario;
 }
+
+/*helpers.uploadImage = (file) => new Promise((resolve, reject) => {
+    const { originalname, buffer } = file
+
+    const blob = bucket.file(originalname.replace(/ /g, "_"))
+    const blobStream = blob.createWriteStream({
+        resumable: false
+    })
+    blobStream.on('finish', () => {
+        const publicUrl = format(
+            `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+        )
+        resolve(publicUrl)
+    })
+        .on('error', () => {
+            reject(`Unable to upload image, something went wrong`)
+        })
+        .end(buffer)
+});*/
 
 module.exports = helpers;
