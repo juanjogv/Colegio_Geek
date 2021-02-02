@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import Form from "../components/Form";
 
@@ -7,10 +8,17 @@ import logo from "../images/logo.png";
 
 
 const UserRegister=()=>{
+//   useEffect(() => {
+//     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
+//         // window.location.href = "../profile"
+//         console.log("existe data");
+//     }
+// })
+
   const camposInputs=[
     {nombre_usuario:'Nombres'},{apellido_usuario:'Apellidos'},{fecha_nacimiento:'Fecha de nacimiento'},
     {direccion_residencia:'Dirección'},{ciudad_residencia:'Municipio'},{telefono_residencia:'Teléfono'},
-    {telefono_celular:'Celular'},{correo_electronico:'Correo'},{contrasena:'Conatraseña'},
+    {telefono_celular:'Celular'},{correo_electronico:'Correo'},{contrasena_usuario:'Conatraseña'},
     {documento_usuario:'documento de identidad'}
   ];
   const validation=[

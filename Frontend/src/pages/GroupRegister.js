@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import Form from "../components/Form";
 
@@ -12,6 +13,13 @@ const GroupRegister=()=>{
   const jor={jornada:['MAÑANA','TARDE']};
   const validation=[{required: true}];
   const errMessage=['Ingrese código del grupo'];
+
+  useEffect(() => {
+    if (cookies.get('corre_electronico')) {
+        window.location.href = "../profile"
+    }
+})
+
   return (
     <div className="row align-items-center">
       <div className="col-12">

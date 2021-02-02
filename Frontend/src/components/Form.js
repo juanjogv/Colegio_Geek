@@ -1,6 +1,8 @@
-import React, {useState} from "react";
 import Axios from "axios";
+import React, {useEffect, useState} from "react";
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+
 
 
 const Form=(props)=>{
@@ -9,17 +11,55 @@ const Form=(props)=>{
 
   const { register,errors, handleSubmit } = useForm();
 
+  // const fSend = async (data) => {    
+  //   const {endpoint}=props;
+    
+  //   console.log(data.foto_estudiante);
+  //   try {
+  //      await Axios.post(`http://localhost:8080${endpoint}`,data,{
+  //       headers: {
+  //           'Content-Type': 'application/json'
+  //       }        
+  //     });
+  //     try {
+  //       console.log(data.foto_estudiante);
+  //         await Axios.post(`http://localhost:8080/imageupload`,data.foto_estudiante,{
+  //         headers: {
+  //             'Content-Type': 'multipart/form-data'
+  //         }        
+  //       });        
+  //     }catch (err) {
+  //       throw new Error('Unable to update file.');
+  //     }
+  //   }
+  //   catch (err) {
+  //     throw new Error('Unable to get a token.');
+  //   }
+  //   console.log(result)
+  // }
 
-  
-  
-  const fSend = (data) => {    
+
+  const fSend = async (data) => {    
     const {endpoint}=props;
-    console.log(data);
-    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/login", {
-    Axios.post(`http://localhost:8080${endpoint}`,data).then((response) => {
-      console.log(response.data);
-    });
+    try {
+      const result= await Axios.post(`http://localhost:8080${endpoint}`,data,{
+        // headers: {
+        //     'Content-Type': 'application/json'          
+        // }        
+      });
+      // if(endpoint=="/signin"){
+      //   cookies.set('correo_electronico', data.correo_electronico, { path: "/" });
+      //   // cookies.set('token', data.token, { path: "/" });
+      //   // history.push("/login")
+      //   window.alert('Usuario Creado')
+      // }
+      console.log(result)
+    }
+    catch (err) {
+      throw new Error('Unable to get a token.');
+    }    
   }
+
 
   const inputMaker=(camps,inTypes,arrEr,vals,errMes)=>{
     return camps.map((camp,index)=>{    
@@ -90,8 +130,10 @@ const Form=(props)=>{
     return (    
       <div className="container border form-color p-5">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}          
-          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}   
+          {/* <Redirect to='/student-board'>       */}
+            <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+          {/* </Redirect> */}
         </form>
       </div>
       );
