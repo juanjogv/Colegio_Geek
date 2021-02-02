@@ -4,9 +4,9 @@ const correo = Router()
 const transporter = require('../correo')
 const pool = require('../database')
 
-correo.post('/',(req,res)=>{
-  const correo =''
-  const enlace = "www.facebook.com"+correo
+//correo.post('/validar-correo',(req,res)=>{
+  const dato ='juan'
+  const enlace = "www.facebook.com"+dato
 
   const mailOptions = {
     from: 'colegio.academia.geek@gmail.com',
@@ -22,6 +22,6 @@ correo.post('/',(req,res)=>{
        console.log('Email sent: ' + info.response);
     }
   });
-})
+//})
 
 module.exports = correo
