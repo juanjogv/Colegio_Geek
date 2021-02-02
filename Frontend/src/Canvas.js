@@ -30,13 +30,13 @@ class Canvas extends Component {
               }
             },
             color: {
-              value: "#000"
+              value: "#5c5c5e"
             },
             shape: {
               type: "circle",
               stroke: {
                 width: 0,
-                color: "#000"
+                color: "#5c5c5e"
               },
               image: {
                 src: "img/github.svg",
@@ -67,7 +67,7 @@ class Canvas extends Component {
             line_linked: {
               enable_auto: true,
               distance: 100,
-              color: "#000",
+              color: "#5c5c5e",
               opacity: 1,
               width: 1,
               condensed_mode: {

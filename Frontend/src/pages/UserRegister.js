@@ -11,7 +11,7 @@ const UserRegister=()=>{
 //   useEffect(() => {
 //     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
 //         // window.location.href = "../profile"
-//         console.log("existe data");
+//         console.log("No existe data");
 //     }
 // })
 
