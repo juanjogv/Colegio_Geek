@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Multer = require("multer")
-const { Storage } = require("@google-cloud/storage")
+const Multer = require("multer");
+const { Storage } = require("@google-cloud/storage");
 const uuid = require("uuid");
 const uuidv1 = uuid.v1;
+const { UploadToBucket } = require('../lib/UploadToBucket');
 
 const storage = new Storage({
     projectId: process.env.GCLOUD_PROJECT,
@@ -23,20 +24,8 @@ const multer = Multer({
 const bucket = storage.bucket(process.env.GCS_BUCKET);
 
 router.post('/imageupload', multer.single('file'), (req, res) => {
-    const newFileName = uuidv1() + "-" + req.file.originalname
-    const blob = bucket.file(newFileName)
-    const blobStream = blob.createWriteStream({
-        resumable: false,
-        gzip: true
-    }).on('finish', () => {
-        const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`
-
-        const imageDetails = JSON.parse(req.body.data)
-        imageDetails.image = publicUrl
-        //db.Image.create(imageDetails).then(() => res.json(imageDetails))
-    })
-    blobStream.end(req.file.buffer)
-    res.json('ok')
+    UploadToBucket(req);
+    res.json('ok');
 })
 
 module.exports = router;
