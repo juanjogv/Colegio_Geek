@@ -8,6 +8,33 @@ $icon-size: 35px;
 
 @import '~react-pro-sidebar/dist/scss/styles.scss';
 
+#board .pro-sidebar-inner {
+  background-color: var(--Cgrey);
+  box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+#board .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+  color: rgba(255, 255, 255, 0.993);
+  margin: 10px 0px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#board .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
+  color: var(--Cgreen); 
+}
+
+.LlogoImg{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  width:220px;  
+}
+
+a:hover {
+  text-decoration: none;
+}
 
 #board {
   height: 100vh;
@@ -16,7 +43,7 @@ $icon-size: 35px;
     cursor: pointer;
     width: 35px;
     height: 35px;
-    background: var(--Cgreen);
+    background: var(--Cgrey);
     color: #fff;
     text-align: center;
     border-radius: 50%;
@@ -34,8 +61,6 @@ $icon-size: 35px;
     .sidebar-btn {
       padding: 1px 15px;
       border-radius: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #adadad;
       text-decoration: none;
       margin: 0 auto;
       height: 35px;
@@ -44,13 +69,6 @@ $icon-size: 35px;
       justify-content: center;
       text-overflow: ellipsis;
       overflow: hidden;
-      span {
-        margin-left: 5px;
-        font-size: 13px;
-      }
-      &:hover {
-        color: $highlight-color;
-      }
     }
   }
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link, Redirect} from 'react-router-dom';
 
 //import react pro sidebar components
 import {
@@ -12,21 +13,30 @@ import {
 } from "react-pro-sidebar";
 
 //import icons from react icons
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FiArrowRight, FiLogOut } from 'react-icons/fi';
 
 import "../css/NavMenu.scss";
+import logoImg from "../images/logoImg.png";
 
-const NavMenu=({collapsed,toggled,handleToggleSidebar})=>{
 
+const NavMenu=({collapsed,toggled,handleToggleSidebar,links,tLinks})=>{
   
-    //create initial menuCollapse state using useState hook
-    const [menuCollapse, setMenuCollapse] = useState(false)
 
-    //create a custom function that will change menucollapse state from false to true and true to false
-  const menuIconClick = () => {
-    //condition checking to change state from true to false and vice versa
-    menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
-  };
+  //create initial menuCollapse state using useState hook
+  const [status, setStatus] = useState(true)
+  const dominio='localhost:3000/'
+
+  const logOut = () => {
+    // return (
+      // 
+      setStatus(true); 
+    // );
+  }
+  if(status){
+    return(
+      <Redirect to='/'></Redirect>
+    );
+  }
 
   return(
     <ProSidebar 
@@ -35,53 +45,29 @@ const NavMenu=({collapsed,toggled,handleToggleSidebar})=>{
       breakPoint="md"
       onToggle={handleToggleSidebar}
     >
-          <SidebarHeader>          
-          </SidebarHeader>
-          <SidebarContent>
-        <Menu iconShape="circle">
-          <MenuItem
-            icon={<FaTachometerAlt />}
-          >
-          </MenuItem>
-          <MenuItem icon={<FaGem />}></MenuItem>
-        </Menu>
-        <Menu iconShape="circle">
-          <SubMenu           
-            icon={<FaRegLaughWink />}
-          >
-            <MenuItem>1</MenuItem>
-            <MenuItem> 2</MenuItem>
-            <MenuItem> 3</MenuItem>
-          </SubMenu>
-          <SubMenu
-            prefix={<span className="badge gray">3</span>}
-            icon={<FaHeart />}
-          >
-            <MenuItem> 1</MenuItem>
-            <MenuItem> 2</MenuItem>
-            <MenuItem> 3</MenuItem>
-          </SubMenu>
-          <SubMenu icon={<FaList />}>
-            <MenuItem> 1 </MenuItem>
-            <MenuItem> 2 </MenuItem>
-            <SubMenu title={`$ 3`}>
-              <MenuItem> 3.1 </MenuItem>
-              <MenuItem> 3.2 </MenuItem>
-              <SubMenu title={`$ 3.3`}>
-                <MenuItem> 3.3.1 </MenuItem>
-                <MenuItem> 3.3.2 </MenuItem>
-                <MenuItem> 3.3.3 </MenuItem>
-              </SubMenu>
-            </SubMenu>
-          </SubMenu>
-        </Menu>
+      <SidebarHeader>   
+        <img className="LlogoImg shadow rounded m-4" src={logoImg} />       
+      </SidebarHeader>
+      <SidebarContent>
+        {links.map((link,index)=>{
+
+          return(         
+            <Link key={index} to={{pathname:`/${link}`}}>       
+              <Menu key={index} iconShape="circle">
+                <MenuItem icon={ <FiArrowRight /> }> {tLinks[index]} </MenuItem>
+              </Menu>
+            </Link>
+          );
+        })}
       </SidebarContent>
-          <SidebarFooter>
-            <Menu iconShape="square">
-              <MenuItem icon={<FaGem />}>Logout</MenuItem>
-            </Menu>
-          </SidebarFooter>
-        </ProSidebar>
+      <SidebarFooter>
+        <div className="btn" onClick={logOut}>           
+          <Menu iconShape="circle">
+            <MenuItem icon={<FiLogOut/>}>Logout</MenuItem>
+          </Menu>
+        </div>
+      </SidebarFooter>
+    </ProSidebar>
   );
 }
 

@@ -1,6 +1,8 @@
-import React, {useState} from "react";
 import Axios from "axios";
+import React, {useEffect, useState} from "react";
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+
 
 
 const Form=(props)=>{
@@ -9,17 +11,28 @@ const Form=(props)=>{
 
   const { register,errors, handleSubmit } = useForm();
 
-
-  
-  
-  const fSend = (data) => {    
+  const fSend = async (data) => {    
     const {endpoint}=props;
-    console.log(data);
-    // Axios.post("https://kuepj-3001.sse.codesandbox.io/api/login", {
-    Axios.post(`http://localhost:8080${endpoint}`,data).then((response) => {
-      console.log(response.data);
-    });
+    try {
+      await Axios.post(`http://localhost:8080${endpoint}`,data);
+      fileSend(data.foto_estudiante[0]);
+      fileSend(data.copia_documento[0]);
+    }
+    catch (error) {
+      console.log('Error while sending data.');
+    }
   }
+
+  const fileSend= async (file)=>{
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      await Axios.post(`http://localhost:8080/imageupload`,formData);      
+    }catch (error) {
+      console.log('Error updating file.');
+    }
+  }
+
 
   const inputMaker=(camps,inTypes,arrEr,vals,errMes)=>{
     return camps.map((camp,index)=>{    
@@ -90,8 +103,10 @@ const Form=(props)=>{
     return (    
       <div className="container border form-color p-5">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}          
-          <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}   
+          {/* <Redirect to='/student-board'>       */}
+            <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+          {/* </Redirect> */}
         </form>
       </div>
       );
@@ -101,8 +116,7 @@ const Form=(props)=>{
     const {uTypes,idT,s,files} = props;
     arrEr=[
       errors.nombre_usuario,errors.apellido_usuario,errors.fecha_nacimiento,errors.direccion_residencia,
-      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico,
-      errors.contrasena
+      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico
     ];
     return (    
       <div className="container border form-color p-5">
