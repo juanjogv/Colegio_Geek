@@ -6,6 +6,8 @@ const morgan = require('morgan')
 const { port } = require('./config');
 
 const app = express();
+// app.use(cors({origin: 'http://localhost:3000',credentials: true})); 
+app.use(cors({origin: '*'}));
 
 const multerMid = multer({
     storage: multer.memoryStorage(),
@@ -16,6 +18,9 @@ const multerMid = multer({
 
 app.set('port', port);
 
+
+
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(multerMid.single('file'))
 app.use(bodyParser.json())

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
 
 import Form from "../components/Form";
 
@@ -7,7 +9,7 @@ import logo from "../images/logo.png";
 
 
 const Login=()=>{
-  const camposInputs=[{correo_electronico:'Correo'},{contrasena:'Conatraseña'}];
+  const camposInputs=[{correo_electronico:'Correo'},{contrasena_usuario:'Conatraseña'}];
   const inputType=['text','password'];
   const validation=[{required: true,pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/},{required: true}];
   const errMessage=['Ingrese un correo valido','Ingrese contraseña'];

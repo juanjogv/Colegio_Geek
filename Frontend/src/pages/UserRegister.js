@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import Form from "../components/Form";
 
@@ -7,10 +8,17 @@ import logo from "../images/logo.png";
 
 
 const UserRegister=()=>{
+//   useEffect(() => {
+//     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
+//         // window.location.href = "../profile"
+//         console.log("existe data");
+//     }
+// })
+
   const camposInputs=[
     {nombre_usuario:'Nombres'},{apellido_usuario:'Apellidos'},{fecha_nacimiento:'Fecha de nacimiento'},
     {direccion_residencia:'Dirección'},{ciudad_residencia:'Municipio'},{telefono_residencia:'Teléfono'},
-    {telefono_celular:'Celular'},{correo_electronico:'Correo'},{contrasena:'Conatraseña'},
+    {telefono_celular:'Celular'},{correo_electronico:'Correo'},
     {documento_usuario:'documento de identidad'}
   ];
   const validation=[
@@ -21,16 +29,15 @@ const UserRegister=()=>{
     {required: false, pattern: /^[A-Za-záéíóúÁÉÍÓÚ ,.'-]+$/i}, 
     {required: false, pattern: /^[0-9]+$/i,minLength: 7},
     {required: false, pattern: /^[0-9]+$/i,minLength: 10}, 
-    {required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/}, 
-    {required: true, minLength: 6},
-    {required: true, pattern: /^[0-9]+$/i},
+    {required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/},     
+    {required: true, pattern: /^[0-9]+$/i}
+    // {required: true, minLength: 6}
   ];
   const errMessage=[
     'Ingrese nombre valido','Ingrese apellido valido','','','','Número telefónico no valido',
-    'Número celular no valido','Se debe ingresar un correo valido','La contraseña es min de 6 caracteres',
-    'Debe ingresar número de identidad'
+    'Número celular no valido','Se debe ingresar un correo valido','Debe ingresar número de identidad'
   ];
-  const inputType=['text','text','date','text','text','text','text','text','password'];
+  const inputType=['text','text','date','text','text','text','text','text'];
   const userType={rol:['ESTUDIANTE','DOCENTE','ADMINISTRATIVO']};
   const typeID={tipo_documento:['TI','CC','NUIP']};
   const sex={genero:['MASCULINO','FEMENINO','OTRO']};
