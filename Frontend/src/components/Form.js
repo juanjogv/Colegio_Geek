@@ -11,53 +11,26 @@ const Form=(props)=>{
 
   const { register,errors, handleSubmit } = useForm();
 
-  // const fSend = async (data) => {    
-  //   const {endpoint}=props;
-    
-  //   console.log(data.foto_estudiante);
-  //   try {
-  //      await Axios.post(`http://localhost:8080${endpoint}`,data,{
-  //       headers: {
-  //           'Content-Type': 'application/json'
-  //       }        
-  //     });
-  //     try {
-  //       console.log(data.foto_estudiante);
-  //         await Axios.post(`http://localhost:8080/imageupload`,data.foto_estudiante,{
-  //         headers: {
-  //             'Content-Type': 'multipart/form-data'
-  //         }        
-  //       });        
-  //     }catch (err) {
-  //       throw new Error('Unable to update file.');
-  //     }
-  //   }
-  //   catch (err) {
-  //     throw new Error('Unable to get a token.');
-  //   }
-  //   console.log(result)
-  // }
-
-
   const fSend = async (data) => {    
     const {endpoint}=props;
     try {
-      const result= await Axios.post(`http://localhost:8080${endpoint}`,data,{
-        // headers: {
-        //     'Content-Type': 'application/json'          
-        // }        
-      });
-      // if(endpoint=="/signin"){
-      //   cookies.set('correo_electronico', data.correo_electronico, { path: "/" });
-      //   // cookies.set('token', data.token, { path: "/" });
-      //   // history.push("/login")
-      //   window.alert('Usuario Creado')
-      // }
-      console.log(result)
+      await Axios.post(`http://localhost:8080${endpoint}`,data);
+      fileSend(data.foto_estudiante[0]);
+      fileSend(data.copia_documento[0]);
     }
-    catch (err) {
-      throw new Error('Unable to get a token.');
-    }    
+    catch (error) {
+      console.log('Error while sending data.');
+    }
+  }
+
+  const fileSend= async (file)=>{
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      await Axios.post(`http://localhost:8080/imageupload`,formData);      
+    }catch (error) {
+      console.log('Error updating file.');
+    }
   }
 
 
@@ -143,8 +116,7 @@ const Form=(props)=>{
     const {uTypes,idT,s,files} = props;
     arrEr=[
       errors.nombre_usuario,errors.apellido_usuario,errors.fecha_nacimiento,errors.direccion_residencia,
-      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico,
-      errors.contrasena
+      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico
     ];
     return (    
       <div className="container border form-color p-5">
