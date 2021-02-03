@@ -2,7 +2,7 @@ const { Router } = require('express')
 const correo = Router()
 const transporter = require('../correo')
 
-correo.post('/validar-correo',(req,res)=>{
+/*correo.post('/validar-correo',(req,res)=>{
   const dato ='juan'
   const enlace = "www.facebook.com"+dato
 
@@ -23,6 +23,6 @@ correo.post('/validar-correo',(req,res)=>{
     }
   });
 })
-
+*/
 
 module.exports = correo
