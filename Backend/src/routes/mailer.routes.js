@@ -10,6 +10,6 @@ correo.get('/mail-autentication', (req, res) => {
       console.log('Email sent: ' + info.response);
     }
   });
-});
+})
 
 module.exports = correo
