@@ -12,8 +12,14 @@ router.post('/signin', async (req, res) => {
 
     const pass_usuario = await helpers.encryptPassword(documento_usuario);
     const codigo_usuario = await helpers.createCodigoUsuario();
-    foto_usuario = UploadToBucket(req);
-    copia_documento = UploadToBucket(req);
+    // foto_usuario = UploadToBucket(req);
+    // copia_documento = UploadToBucket(req);
+    const files=[], urlFiles=[{},{}];
+    if(foto_usuario[0] !== undefined) { files.push(foto_usuario[0])}
+    if(copia_documento[0] !== undefined) { files.push(copia_documento[0])}
+    files.map(file=>{ UploadToBucket(file)}); 
+    const urlFoto_usuario = UploadToBucket(foto_usuario[0]);
+    const urlCopia_documento = UploadToBucket(copia_documento[0]);
 
     const newUser = [
         rol, codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
@@ -21,7 +27,7 @@ router.post('/signin', async (req, res) => {
         foto_usuario, copia_documento, pass_usuario
     ];
 
-    if (rol == 'estudiante') {
+    if (rol == 'ESTUDIANTE') {
         const { id_grupo } = req.body;
         newUser.push(id_grupo)
         try {
@@ -33,7 +39,7 @@ router.post('/signin', async (req, res) => {
             res.json("Error");
         }
 
-    } else if (rol == 'docente') {
+    } else if (rol == 'DOCENTE') {
 
         try {
             const rows = await pool.query(format(`INSERT INTO docentes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
@@ -44,7 +50,7 @@ router.post('/signin', async (req, res) => {
             res.json("Error");
         }
 
-    } else if (rol == 'administrativo') {
+    } else if (rol == 'ADMINISTRATIVO') {
 
         try {
             const rows = await pool.query(format(`INSERT INTO administrativos ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
