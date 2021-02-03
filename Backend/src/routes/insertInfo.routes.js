@@ -17,18 +17,6 @@ router.post('/historial', async (req, res) => {
   
 });
 
-router.post('/usuarios_grupos', async (req, res) => {
-    const { id_usuarios_grupo, id_usuario, id_grupo } = req.body;
-
-    const newUsuarioGrupo = [
-        id_usuarios_grupo, id_usuario, id_grupo
-    ];
-
-    const rows = await pool.query(format(`INSERT INTO usuarios_grupos ( id_usuarios_grupo, 
-        id_usuario, id_grupo ) VALUES %L`, [newUsuarioGrupo]));
-
-});
-
 router.post('/grupos', async (req, res) => {
     const { id_grupo, codigo_grupo, jornada } = req.body;
 

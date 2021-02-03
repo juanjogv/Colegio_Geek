@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const correo = Router()
-const { transporter, mailOptions } = require('../correo')
+const transporter = require('../correo')
 
-/*correo.post('/validar-correo',(req,res)=>{
+correo.post('/validar-correo',(req,res)=>{
   const dato ='juan'
   const enlace = "www.facebook.com"+dato
 
@@ -23,6 +23,6 @@ const { transporter, mailOptions } = require('../correo')
     }
   });
 })
-*/
+
 
 module.exports = correo
