@@ -24,8 +24,8 @@ const multer = Multer({
 const bucket = storage.bucket(process.env.GCS_BUCKET);
 
 helper.UploadToBucket = (req) => {
-    console.log(req.file);
     const newFileName = uuidv1() + "-" + req.file.originalname;
+    let url;
     const blob = bucket.file(newFileName);
     const blobStream = blob.createWriteStream({
         resumable: false,
@@ -35,9 +35,13 @@ helper.UploadToBucket = (req) => {
 
         console.log(publicUrl);
 
+
         //db.Image.create(imageDetails).then(() => res.json(imageDetails))
     });
     blobStream.end(req.file.buffer);
+    return url;
+
+
 }
 
 module.exports = helper;
