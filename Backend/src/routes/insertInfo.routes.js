@@ -4,15 +4,17 @@ const pool = require('../database');
 const format = require('pg-format');
 
 router.post('/historial', async (req, res) => {
-    const { id_historial, codigo_estudiante, ano, grado, estado, nota_promedi0, id_usuario } = req.body;
+    const { ano, grado, estado, nota_promedio, id_estudiante } = req.body;
 
     const newHistorial = [
-        id_historial, codigo_estudiante, ano, grado, estado, nota_promedi0, id_usuario
+         ano, grado, estado, nota_promedio, id_estudiante
     ];
 
-    const rows = await pool.query(format(`INSERT INTO historial (id_historial, codigo_estudiante, ano, grado, 
-    estado, nota_promedio, id_usuario) VALUES %L`, [newHistorial]));
+    const rows = await pool.query(format(`INSERT INTO historial ( ano, grado, 
+    estado, nota_promedio, id_estudiante) VALUES %L`, [newHistorial]));
 
+    console.log("ejecutado")
+  
 });
 
 router.post('/usuarios_grupos', async (req, res) => {
