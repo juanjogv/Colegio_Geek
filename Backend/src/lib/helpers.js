@@ -19,7 +19,8 @@ helpers.matchPassword = async (password, savedPassword) => {
 };
 
 helpers.createCodigoUsuario = async () => {
-    var year = new Date().getFullYear();
+    let year = new Date().getFullYear();
+    console.log(year)
     let checker = await pool.query('SELECT * FROM ultimo_usuario');
 
     if (checker.rows[0].year != year) {
@@ -31,7 +32,6 @@ helpers.createCodigoUsuario = async () => {
     await pool.query(`UPDATE ultimo_usuario SET identificador = '${id.rows[0]['identificador']}'`);
 
     const codigo_usuario = year + ('00' + id.rows[0]['identificador']).slice(-3);
-
     return codigo_usuario;
 }
 

@@ -2,6 +2,7 @@ const { Router } = require('express')
 const correo = Router()
 const transporter = require('../correo')
 
+<<<<<<< HEAD
 /*correo.post('/validar-correo',(req,res)=>{
   const dato ='juan'
   const enlace = "www.facebook.com"+dato
@@ -15,6 +16,9 @@ const transporter = require('../correo')
 
   transporter.sendMail(mailOptions, function(error, info){
   correo.get('/mail-autentication', (req, res) => {
+=======
+correo.get('/mail-autentication', (req, res) => {
+>>>>>>> 5d32d6f7b29aa1892e807bfd18b53ccd73c56f86
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
@@ -23,6 +27,9 @@ const transporter = require('../correo')
     }
   });
 })
+<<<<<<< HEAD
 */
+=======
+>>>>>>> 5d32d6f7b29aa1892e807bfd18b53ccd73c56f86
 
 module.exports = correo
