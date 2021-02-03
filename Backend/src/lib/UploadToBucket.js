@@ -39,8 +39,6 @@ helper.UploadToBucket = (req) => {
         //db.Image.create(imageDetails).then(() => res.json(imageDetails))
     });
     blobStream.end(req.file.buffer);
-    return url;
-
 
 }
 
