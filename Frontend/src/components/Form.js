@@ -7,7 +7,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const Form=(props)=>{
-  const {page,camps,inTypes,btnText,vals,errMes,dpoinent} = props;
+  const {page,camps,inTypes,btnText,vals,errMes,endpoint} = props;
   let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
   const history = useHistory();
