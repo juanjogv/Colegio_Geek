@@ -74,7 +74,29 @@ router.post('/notas', async (req, res) => {
         valor, id_plan_evaluacion,id_estudiante  ) VALUES %L`, [newGrupo]));
 
     console.log('ejecutado')
-    console.log('ejecutado')
+    console.log('ejecutado') 
 });
+
+router.post('/estudiantes_grupos', async(req,res)=>{
+  const{id_estudiante,id_grupos} = req.body
+
+  const newGrupo = [
+    id_estudiante,id_grupos
+  ]
+
+    const rows = await pool.query(format(`INSERT INTO estudiantes_grupos( 
+        id_estudiante, id_grupos ) VALUES %L`, [newGrupo]));
+  
+  console.log('ejecutado')
+  
+})
+
+
+
+
+
+
+
+
 
 module.exports = router;
