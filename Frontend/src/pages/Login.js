@@ -39,12 +39,12 @@ const Login=()=>{
           btnText="Login"
         />
         <div className="d-flex font-weight-bold pt-4 spacing">
-          <Link to='/' className="col-6 btn-log ">
+          <Link to='/' className="col-6 btn-log mb-4">
             ¿Olvidaste tu contraseña?
           </Link>
-          <Link to='/register' className="col-6 btn-log ">
+          {/* <Link to='/register' className="col-6 btn-log ">
             Registrarme
-          </Link>
+          </Link> */}
           </div>
         </div>      
     </div>

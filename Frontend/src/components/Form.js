@@ -114,7 +114,7 @@ const Form=(props)=>{
   const inFileMaker=(files)=>{
     return files.map((file,index)=>{
       return(
-        <input ref={register} type="file" name={file} key={index} />
+        <input ref={register} type="file" name={file} title="" key={index} />
       );
     });
   }
@@ -123,7 +123,7 @@ const Form=(props)=>{
   if(page=="1"){
     arrEr=[errors.correo_electronico, errors.contrasena];
     return (    
-      <div className="container border form-color p-5">
+      <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}   
           {/* <Redirect to='/student-board'>       */}
@@ -141,7 +141,7 @@ const Form=(props)=>{
       errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico,errors.documento_usuario
     ];
     return (    
-      <div className="container border form-color p-5">
+      <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}            
           <div className="d-flex justify-content-center">
@@ -164,7 +164,7 @@ const Form=(props)=>{
     const {grA} = props;
     arrEr=[errors.codigo_materia, errors.nombre_materia];
     return (    
-      <div className="container border form-color p-5">
+      <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
           <div className="d-flex justify-content-center">
@@ -180,7 +180,7 @@ const Form=(props)=>{
     const {j} = props;
     arrEr=[errors.codigo_grupo];
     return (    
-      <div className="container border form-color p-5">
+      <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
           <div className="d-flex justify-content-center">

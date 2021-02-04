@@ -44,11 +44,11 @@ const UserRegister=()=>{
   const file=['foto_usuario','copia_documento'];
 
   return (
-    <div className="row align-items-start">
-     < div className="col-12">
+    <div className="row justify-content-center">
+      {/* <div className="col-12">
         <img className="Llogo shadow rounded my-5" src={logo} />
-      </div>
-      <div className="col-12">
+      </div> */}
+      <div className="col-12 col-md-10 my-5 p-0">
         <Form
           page="2"
           camps={camposInputs}

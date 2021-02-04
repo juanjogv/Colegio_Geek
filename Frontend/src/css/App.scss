@@ -49,3 +49,11 @@ a, .btn-log{
 a:hover{
   color: var(--Cgreen);
 }
+
+input[type='file'] {
+  color: rgba(0, 0, 0, 0)
+}
+
+#form{
+  left: 5%;
+}

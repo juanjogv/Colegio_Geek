@@ -14,11 +14,11 @@ const GroupRegister=()=>{
   const validation=[{required: true}];
   const errMessage=['Ingrese código del grupo'];
 
-  useEffect(() => {
-    if (cookies.get('corre_electronico')) {
-        window.location.href = "../profile"
-    }
-})
+//   useEffect(() => {
+//     if (Cookies.get('corre_electronico')) {
+//         window.location.href = "../profile"
+//     }
+// })
 
   return (
     <div className="row align-items-center">

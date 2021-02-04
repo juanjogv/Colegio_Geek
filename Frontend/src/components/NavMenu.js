@@ -38,7 +38,7 @@ const NavMenu=({collapsed,toggled,handleToggleSidebar,links,tLinks})=>{
   }
 
   return(
-    <ProSidebar 
+    <ProSidebar
       collapsed={collapsed}
       toggled={toggled}
       breakPoint="md"

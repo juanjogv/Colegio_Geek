@@ -6,17 +6,17 @@ import NavMenu from "../components/NavMenu";
 import Dashboard from "../components/Dashboard";
 
 
-const StudentBoard=()=>{
+const TeacherBoard=()=>{
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
-  const urlText=['Inicio','Mis Notas','Mis Materias','Historial','Cambiar clave'];
-  const url=['student-board/','student-board/grades','student-board/signatures','student-board/history','student-board/password']
+  const urlText=['Inicio','Mis grupos','Mis Materias','Seguimientos','Cambiar clave'];
+  const url=['teacher-board/','teacher-board/grades','teacher-board/signatures','teacher-board/history','teacher-board/password']
 
   // useEffect(() => {
   //   if (!cookies.get('correo_electronico')) {
   //     window.location.href = "/"
   //     console.log('Necesita iniciar sesion para usar esta función')
-  //   }
+  //  }
   // });
 
   const handleToggleSidebar = (value) => {
@@ -38,4 +38,4 @@ const StudentBoard=()=>{
     </div>
   );
 }
-export default StudentBoard;
+export default TeacherBoard;
