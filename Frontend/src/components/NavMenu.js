@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {Link, Redirect} from 'react-router-dom';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
-//import react pro sidebar components
 import {
   ProSidebar,
   Menu,
@@ -23,14 +24,12 @@ const NavMenu=({collapsed,toggled,handleToggleSidebar,links,tLinks})=>{
   
 
   //create initial menuCollapse state using useState hook
-  const [status, setStatus] = useState(true)
+  const [status, setStatus] = useState(false)
   const dominio='localhost:3000/'
 
   const logOut = () => {
-    // return (
-      // 
-      setStatus(true); 
-    // );
+      cookies.remove('correo_electronico');   
+      setStatus(true);   
   }
   if(status){
     return(

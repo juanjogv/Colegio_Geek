@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const pool = require('../database');
 const format = require('pg-format');
 const helpers = require('../lib/helpers');
-const { UploadToBucket } = require('../lib/UploadToBucket');
+// const { UploadToBucket } = require('../lib/UploadToBucket');
+
+router.get('/test', async (req, res) => {
+    res.send(helpers.createCodigoUsuario());
+});
 
 router.get('/test', async (req, res) => {
     res.send(helpers.createCodigoUsuario());
@@ -29,7 +32,7 @@ router.post('/signin', async (req, res) => {
         try {
             const rows = await pool.query(format(`INSERT INTO estudiantes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario, id_grupo) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario, id_grupo) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
             res.json("Error");
@@ -40,7 +43,7 @@ router.post('/signin', async (req, res) => {
         try {
             const rows = await pool.query(format(`INSERT INTO docentes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
             res.json("Error");
@@ -51,7 +54,7 @@ router.post('/signin', async (req, res) => {
         try {
             const rows = await pool.query(format(`INSERT INTO administrativos ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
             res.json("Error");

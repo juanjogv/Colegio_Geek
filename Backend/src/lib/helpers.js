@@ -20,7 +20,6 @@ helpers.matchPassword = async (password, savedPassword) => {
 
 helpers.createCodigoUsuario = async () => {
     let year = new Date().getFullYear();
-    console.log(year)
     let checker = await pool.query('SELECT * FROM ultimo_usuario');
 
     if (checker.rows[0].year != year) {

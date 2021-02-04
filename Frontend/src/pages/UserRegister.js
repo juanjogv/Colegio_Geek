@@ -11,7 +11,7 @@ const UserRegister=()=>{
 //   useEffect(() => {
 //     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
 //         // window.location.href = "../profile"
-//         console.log("existe data");
+//         console.log("No existe data");
 //     }
 // })
 
@@ -41,7 +41,7 @@ const UserRegister=()=>{
   const userType={rol:['ESTUDIANTE','DOCENTE','ADMINISTRATIVO']};
   const typeID={tipo_documento:['TI','CC','NUIP']};
   const sex={genero:['MASCULINO','FEMENINO','OTRO']};
-  const file=['foto_estudiante','copia_documento'];
+  const file=['foto_usuario','copia_documento'];
 
   return (
     <div className="row align-items-start">

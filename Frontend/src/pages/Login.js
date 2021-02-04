@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import {Link} from 'react-router-dom';
 
 
 import Form from "../components/Form";
@@ -14,10 +15,17 @@ const Login=()=>{
   const validation=[{required: true,pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/},{required: true}];
   const errMessage=['Ingrese un correo valido','Ingrese contraseña'];
 
+  //   useEffect(() => {
+//     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
+//         // window.location.href = "../profile"
+//         console.log("No existe data");
+//     }
+// })
+
   return (
     <div className="row align-items-center">
-      <div className="col-12">
-        <img className="Llogo shadow rounded " src={logo} />
+      <div className="col-12 py-4">
+        <img className="Llogo shadow rounded" src={logo} />
       </div>
       <div className="col-12">
         <Form
@@ -30,7 +38,15 @@ const Login=()=>{
           method="post"
           btnText="Login"
         />
-      </div>
+        <div className="d-flex font-weight-bold pt-4 spacing">
+          <Link to='/' className="col-6 btn-log ">
+            ¿Olvidaste tu contraseña?
+          </Link>
+          <Link to='/register' className="col-6 btn-log ">
+            Registrarme
+          </Link>
+          </div>
+        </div>      
     </div>
   );
 }

@@ -2,35 +2,55 @@ import Axios from "axios";
 import React, {useEffect, useState} from "react";
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import Cookies from 'universal-cookie';
 
-
+const cookies = new Cookies();
 
 const Form=(props)=>{
   const {page,camps,inTypes,btnText,vals,errMes,endpoint} = props;
-  let arrEr=[];
-
+  let arrEr=[],test;
   const { register,errors, handleSubmit } = useForm();
-
+  const history = useHistory();
+  
   const fSend = async (data) => {    
     const {endpoint}=props;
     try {
-      await Axios.post(`http://localhost:8080${endpoint}`,data);
-      fileSend(data.foto_estudiante[0]);
-      fileSend(data.copia_documento[0]);
+      if(endpoint ==='/signin'){        
+        const files=[];
+        let ind=0, urlFiles=['',''];
+        if(data.copia_documento[0] !== undefined) { files.push(data.copia_documento[0]); ind=1}
+        if(data.foto_usuario[0] !== undefined) { files.push(data.foto_usuario[0]);ind=0}
+        await Promise.all(files.map(async (file,index)=>{
+          urlFiles[index+ind]=`${await fileSend(file)}`;
+        }));
+        console.log(urlFiles[1]);
+        console.log(urlFiles[0]);    
+        data.foto_usuario=`${urlFiles[0]}`;  data.copia_documento=`${urlFiles[1]}`;
+        console.log(data)     
+        Axios.post(`http://localhost:8080${endpoint}`,data); 
+        cookies.set('correo_electronico', data.correo_electronico, { path: "/" });
+        history.push("/")
+        window.alert('Usuario Creado');
+      }
+      else if(endpoint !=='/signin'){Axios.post(`http://localhost:8080${endpoint}`,data)}
     }
     catch (error) {
+      console.log(error)
       console.log('Error while sending data.');
     }
   }
 
   const fileSend= async (file)=>{
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("file", file);
+    let res=''
     try {
-      await Axios.post(`http://localhost:8080/imageupload`,formData);      
+     res = await Axios.post(`http://localhost:8080/imageupload`,formData); 
+           
     }catch (error) {
       console.log('Error updating file.');
     }
+    return res.data
   }
 
 
@@ -115,8 +135,8 @@ const Form=(props)=>{
   else if(page=="2"){
     const {uTypes,idT,s,files} = props;
     arrEr=[
-      errors.nombre_usuario,errors.apellido_usuario,errors.fecha_nacimiento,errors.direccion_residencia,
-      errors.ciudad_residencia,errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico
+      errors.nombre_usuario,errors.apellido_usuario,errors.fecha_nacimiento,errors.direccion_residencia,errors.ciudad_residencia,
+      errors.telefono_residencia,errors.telefono_celular,errors.correo_electronico,errors.documento_usuario
     ];
     return (    
       <div className="container border form-color p-5">
