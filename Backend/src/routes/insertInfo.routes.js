@@ -79,7 +79,6 @@ router.post('/notas', async (req, res) => {
 
 router.post('/estudiantes_grupos', async(req,res)=>{
   const{id_estudiante,id_grupos} = req.body
-
   const newGrupo = [
     id_estudiante,id_grupos
   ]
@@ -90,13 +89,6 @@ router.post('/estudiantes_grupos', async(req,res)=>{
   console.log('ejecutado')
   
 })
-
-
-
-
-
-
-
 
 
 module.exports = router;
