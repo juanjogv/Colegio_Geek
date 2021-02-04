@@ -7,13 +7,12 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const Form=(props)=>{
-  const {page,camps,inTypes,btnText,vals,errMes,endpoint} = props;
-  let arrEr=[],test;
+  const {page,camps,inTypes,btnText,vals,errMes,dpoinent} = props;
+  let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
   const history = useHistory();
   
-  const fSend = async (data) => {    
-    const {endpoint}=props;
+  const fSend = async (data) => {
     try {
       if(endpoint ==='/signin'){        
         const files=[];
@@ -32,7 +31,10 @@ const Form=(props)=>{
         history.push("/")
         window.alert('Usuario Creado');
       }
-      else if(endpoint !=='/signin'){Axios.post(`http://localhost:8080${endpoint}`,data)}
+      else if(endpoint !=='/signin'){
+        const res=Axios.post(`http://localhost:8080${endpoint}`,data);
+        console.log(res.data);
+      }
     }
     catch (error) {
       console.log(error)
