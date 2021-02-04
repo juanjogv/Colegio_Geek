@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const correo = Router()
-const { transporter, mailOptions } = require('../correo')
+const transporter = require('../correo')
 
 correo.get('/mail-autentication', (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {

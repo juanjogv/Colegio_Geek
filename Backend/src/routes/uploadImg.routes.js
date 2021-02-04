@@ -34,4 +34,28 @@ const storage = new Storage({
     blobStream.end(req.file.buffer);
   });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+router.post('/imageupload', multer.single('file'), async (req, res) => {
+<<<<<<< HEAD
+    UploadToBucket(req)
+    res.json('ok');
+})
+
+module.exports = router;
+=======
+    const newFileName = uuidv1() + "-" + req.file.originalname
+    const blob = bucket.file(newFileName)
+    const blobStream = blob.createWriteStream({
+        resumable: false,
+        gzip: true
+    }).on('finish', () => {
+        const publicUrl = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`
+        res.json(publicUrl)
+    })
+    blobStream.end(req.file.buffer)
+});
+module.exports = router;
+>>>>>>> 5d32d6f7b29aa1892e807bfd18b53ccd73c56f86
+>>>>>>> a719e9338c42260adf95e2536d95e64219e6fa06

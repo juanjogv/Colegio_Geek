@@ -3,77 +3,78 @@ const router = express.Router();
 const pool = require('../database');
 const format = require('pg-format');
 
+/*REVISADO*/
 router.post('/historial', async (req, res) => {
-    const { id_historial, codigo_estudiante, ano, grado, estado, nota_promedi0, id_usuario } = req.body;
+    const {codigo_estudiante, ano, grado, estado, nota_promedio, id_estudiante } = req.body;
+
 
     const newHistorial = [
-        id_historial, codigo_estudiante, ano, grado, estado, nota_promedi0, id_usuario
+         codigo_estudiante, ano, grado, estado, nota_promedio, id_estudiante
     ];
 
-    const rows = await pool.query(format(`INSERT INTO historial (id_historial, codigo_estudiante, ano, grado, 
-    estado, nota_promedio, id_usuario) VALUES %L`, [newHistorial]));
+    const rows = await pool.query(format(`INSERT INTO historial ( ano, grado, 
+    estado, nota_promedio, id_estudiante) VALUES %L`, [newHistorial]));
 
+    console.log("ejecutado")
+  
 });
 
-router.post('/usuarios_grupos', async (req, res) => {
-    const { id_usuarios_grupo, id_usuario, id_grupo } = req.body;
-
-    const newUsuarioGrupo = [
-        id_usuarios_grupo, id_usuario, id_grupo
-    ];
-
-    const rows = await pool.query(format(`INSERT INTO usuarios_grupos ( id_usuarios_grupo, 
-        id_usuario, id_grupo ) VALUES %L`, [newUsuarioGrupo]));
-
-});
-
+/*REVISADO*/
 router.post('/grupos', async (req, res) => {
-    const { id_grupo, codigo_grupo, jornada } = req.body;
+    const {codigo_grupo, jornada, id_profesor } = req.body;
 
     const newGrupo = [
-        id_grupo, codigo_grupo, jornada
+        codigo_grupo, jornada, id_profesor
     ];
 
-    const rows = await pool.query(format(`INSERT INTO grupos ( id_grupo, codigo_grupo, 
-        jornada ) VALUES %L`, [newGrupo]));
+    const rows = await pool.query(format(`INSERT INTO grupos (codigo_grupo, 
+        jornada ,id_profesor) VALUES %L`, [newGrupo]));
+
+    console.log('ejecutado')
 
 });
 
-/* Por terminar */
+/* REVISADO*/
 router.post('/materias', async (req, res) => {
-    const { id_grupo, codigo_grupo, jornada } = req.body;
-
+    const {codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once,id_grupo } = req.body;
     const newGrupo = [
-        id_grupo, codigo_grupo, jornada
+        codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once, id_grupo 
     ];
 
-    const rows = await pool.query(format(`INSERT INTO grupos ( id_grupo, codigo_grupo, 
-        jornada ) VALUES %L`, [newGrupo]));
+    const rows = await pool.query(format(`INSERT INTO materias (codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once, id_grupo) VALUES %L`, [newGrupo]));
+
+  console.log('ejecutado')
+
 
 });
 
+/*REVISADO*/
 router.post('/planes_evaluacion', async (req, res) => {
-    const { id_plan, cantidad_notas, descripcion_plan, id_materia, id_grupo } = req.body;
+    const { cantidad_notas, descripcion_plan, id_materia, id_grupo } = req.body;
 
     const newGrupo = [
-        id_plan, cantidad_notas, descripcion_plan, id_materia, id_grupo
+        cantidad_notas, descripcion_plan, id_materia, id_grupo
     ];
 
     const rows = await pool.query(format(`INSERT INTO planes_evaluacion ( 
-        id_plan, cantidad_notas, descripcion_plan, id_materia, id_grupo ) VALUES %L`, [newGrupo]));
+         cantidad_notas, descripcion_plan, id_materia, id_grupo ) VALUES %L`, [newGrupo]));
 
+  console.log('ejecutado')
 });
 
+/*REVISADO*/
 router.post('/notas', async (req, res) => {
-    const { id_notas, valor, id_plan_evaluacion } = req.body;
+    const {valor, id_plan_evaluacion,id_estudiante } = req.body;
 
     const newGrupo = [
-        id_notas, valor, id_plan_evaluacion
+        valor, id_plan_evaluacion,id_estudiante
     ];
 
-    const rows = await pool.query(format(`INSERT INTO planes_evaluacion ( 
-        id_notas, valor, id_plan_evaluacion  ) VALUES %L`, [newGrupo]));
+    const rows = await pool.query(format(`INSERT INTO notas ( 
+        valor, id_plan_evaluacion,id_estudiante  ) VALUES %L`, [newGrupo]));
 
+    console.log('ejecutado')
+    console.log('ejecutado')
 });
 
 module.exports = router;
