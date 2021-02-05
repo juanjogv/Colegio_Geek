@@ -55,5 +55,10 @@ input[type='file'] {
 }
 
 #form{
-  left: 5%;
+  left: 100px;
+
+  @media (max-width: 769px) {
+    left: 10px;
+  }
+
 }
