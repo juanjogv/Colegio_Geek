@@ -23,14 +23,14 @@ const GroupRegister=()=>{
 //     if (Cookies.get('corre_electronico')) {
 //         window.location.href = "../profile"
 //     }
-  const getData = async () => {
-    const {data}= await Axios.get(`http://localhost:8080/teachers`);            
-    setList(data);
-  }
-  if(loading){
-    getData();
-    setLoading(false);
-  }
+    const getData = async () => {
+      const {data}= await Axios.get(`http://localhost:8080/teachers`);            
+      setList(data);
+    }
+    if(loading){
+      getData();
+      setLoading(false);
+    }
   },[]);
 
   return (

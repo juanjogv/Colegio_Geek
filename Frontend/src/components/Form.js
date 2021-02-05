@@ -120,6 +120,15 @@ const Form=(props)=>{
     });
   }
 
+  const selectMaker=(tList)=>{
+    return tList.map((t,ind)=>{
+      return(
+        <option key={ind} value={t.id_docente}>{t.nombre}</option>
+      );
+    });
+  }
+
+
   
   if(page=="1"){
     arrEr=[errors.correo_electronico, errors.contrasena];
@@ -162,7 +171,7 @@ const Form=(props)=>{
   }
   
   else if(page=="3"){
-    const {grA} = props;
+    const {grA,tList} = props;
     arrEr=[errors.codigo_materia, errors.nombre_materia];
     return (    
       <div className="container border form-color p-3">
@@ -170,7 +179,11 @@ const Form=(props)=>{
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
           <div className="d-flex justify-content-center">
             {checkMaker('grupos',grA)}
-          </div>   
+          </div>
+          <label htmlFor="list">Titular</label>
+          <select id="list" name="id_profesor" ref={register}>
+            {selectMaker(tList)}
+          </select>   
           <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>
@@ -185,13 +198,9 @@ const Form=(props)=>{
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}
           <label htmlFor="list">Titular</label>
-            <select id="list" name="id_profesor" ref={register}>
-              {tList.map((t,ind)=>{
-                return(
-                  <option key={ind} value={t.id_docente}>{t.nombre}</option>
-                );
-              })}
-            </select>
+          <select id="list" name="id_profesor" ref={register}>
+            {selectMaker(tList)}
+          </select>
           <div className="d-flex justify-content-center">
             {radioMaker(Object.keys(j),j.jornada)}
           </div>   
@@ -199,8 +208,7 @@ const Form=(props)=>{
         </form>
       </div>
       );
-  }
-  
+  }  
 }
 
 export default Form;

@@ -36,12 +36,37 @@ router.post('/grupos', async (req, res) => {
 
 /* REVISADO*/
 router.post('/materias', async (req, res) => {
-    const {codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once,id_grupo } = req.body;
-    const newGrupo = [
-        codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once, id_grupo 
-    ];
+    let sexto=false,septimo=false,octavo=false,noveno=false,decimo=false,once=false;
+    // const {codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once,id_grupo } = req.body;
+    const {codigo_materia, nombre_materia, grupos, id_profesor } = req.body;
+    for(let grupo of grupos){
+        switch (grupo) {
+            case 'sexto':
+              sexto=true;
+              break;
+            case 'septimo':
+              septimo=true;
+              break;
+            case 'octavo':
+                octavo=true;
+                break;
+            case 'noveno':
+                noveno=true;
+                break;
+            case 'decimo':
+                decimo=true;
+                break;
+            case 'once':
+                once=true;
+                break; 
+        }          
+    }
 
-    const rows = await pool.query(format(`INSERT INTO materias (codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once, id_grupo) VALUES %L`, [newGrupo]));
+    const newGrupo = [
+        codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo, once, id_profesor
+    ];
+    console.log(newGrupo)
+    const rows = await pool.query(format(`INSERT INTO materias (codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once,id_profesor) VALUES %L`, [newGrupo]));
 
   console.log('ejecutado')
 
