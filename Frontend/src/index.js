@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import App from './App';
 
-ReactDOM.hydrate(
+ReactDOM.render(
   <React.StrictMode>
     <App className="container"/>
   </React.StrictMode>,

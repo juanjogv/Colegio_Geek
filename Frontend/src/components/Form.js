@@ -13,6 +13,7 @@ const Form=(props)=>{
   const history = useHistory();
   
   const fSend = async (data) => {
+    console.log(data);
     try {
       if(endpoint ==='/signin'){        
         const files=[];
@@ -177,12 +178,20 @@ const Form=(props)=>{
   }
 
   else if(page=="4"){
-    const {j} = props;
+    const {j,tList} = props;
     arrEr=[errors.codigo_grupo];
     return (    
       <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}
+          <label htmlFor="list">Titular</label>
+            <select id="list" name="id_profesor" ref={register}>
+              {tList.map((t,ind)=>{
+                return(
+                  <option key={ind} value={t.id_docente}>{t.nombre}</option>
+                );
+              })}
+            </select>
           <div className="d-flex justify-content-center">
             {radioMaker(Object.keys(j),j.jornada)}
           </div>   

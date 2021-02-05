@@ -12,6 +12,8 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 app.use(express.static(path.join(__dirname, 'build')))
 
+
+
 const multerMid = multer({
     storage: multer.memoryStorage(),
     limits: {
@@ -31,8 +33,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors());
 
 app.use(require('./routes/insertInfo.routes'))
+app.use(require('./routes/getInfo.routes'))
 app.use(require('./routes/index.routes'));
-app.use(require('./routes/autentication.routes'));
+app.use(require('./routes/autentication.routes'))
 app.use(require('./routes/mailer.routes'))
 app.use(require('./routes/uploadImg.routes'))
 

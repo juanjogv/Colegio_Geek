@@ -28,12 +28,10 @@ router.post('/signin', async (req, res) => {
 
     if (rol == 'ESTUDIANTE') {
         console.log(rol);
-        const { id_grupo } = req.body;
-        newUser.push(id_grupo)
         try {
             const rows = await pool.query(format(`INSERT INTO estudiantes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_usuario, copia_documento, pass_usuario, id_grupo) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
             console.log(error);
@@ -71,7 +69,7 @@ router.post('/signin', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { rol, correo_electronico, contrasena_usuario } = req.body;
 
-    if (rol == 'estudiante') {
+    if (rol == 'ESTUDIANTE') {
 
         const { rows } = await pool.query(`SELECT * FROM estudiantes WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {
@@ -81,7 +79,7 @@ router.post('/login', async (req, res) => {
             res.json(rows);
         }
 
-    } else if (rol == 'docente') {
+    } else if (rol == 'DOCENTE') {
 
         const { rows } = await pool.query(`SELECT * FROM docentes WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {
@@ -91,7 +89,7 @@ router.post('/login', async (req, res) => {
             res.json(rows);
         }
 
-    } else if (rol == "administrativo") {
+    } else if (rol == "ADMINISTRATIVO") {
 
         const { rows } = await pool.query(`SELECT * FROM administrativos WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {
