@@ -5,12 +5,14 @@ import { AnimatedSwitch, AnimatedRoute } from "react-router-transition";
 
 import Particles from "./Canvas";
 import Login from "./pages/Login";
+import AdminBoard from "./pages/AdminBoard";
 import UserRegister from "./pages/UserRegister";
 import GroupRegister from "./pages/GroupRegister";
 import SubjectRegister from "./pages/SubjectRegister";
+import ChangePassword from "./pages/ChangePassword";
 import StudentBoard from "./pages/StudentBoard";
 import TeacherBoard from "./pages/TeacherBoard";
-import AdminBoard from "./pages/AdminBoard";
+
 import './css/App.scss';
 
 const App = () => {
@@ -33,6 +35,7 @@ const App = () => {
               <AnimatedRoute exact path="/admin-board/user-register" component={UserRegister}/>
               <AnimatedRoute path="/admin-board/group-register" component={GroupRegister}/>
               <AnimatedRoute path="/admin-board/subject-register" component={SubjectRegister}/>
+              <AnimatedRoute path="/admin-board/change-password" component={ChangePassword}/>
             </Switch>
           </AdminBoard>
         </Route>  
@@ -42,6 +45,7 @@ const App = () => {
               {/* <Route exact path="/teacher-board/user-register" component={UserRegister}/>
               <Route exact path="/teacher-board/group-register" component={GroupRegister}/>
               <Route exact path="/teacher-board/subject-register" component={SubjectRegister}/> */}
+              <AnimatedRoute path="/teacher-board/change-password" component={ChangePassword}/>
             </Switch>
           </TeacherBoard>
         </Route>  
@@ -51,6 +55,7 @@ const App = () => {
               {/* <Route exact path="/student-board/user-register" component={UserRegister}/>
               <Route exact path="/student-board/group-register" component={GroupRegister}/>
               <Route exact path="/student-board/subject-register" component={SubjectRegister}/> */}
+              <AnimatedRoute path="/student-board/change-password" component={ChangePassword}/>
             </Switch>
           </StudentBoard>
         </Route>

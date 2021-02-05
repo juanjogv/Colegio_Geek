@@ -27,6 +27,7 @@ router.post('/signin', async (req, res) => {
     ];
 
     if (rol == 'ESTUDIANTE') {
+        console.log(rol);
         const { id_grupo } = req.body;
         newUser.push(id_grupo)
         try {
@@ -39,7 +40,7 @@ router.post('/signin', async (req, res) => {
         }
 
     } else if (rol == 'DOCENTE') {
-
+        console.log(rol);
         try {
             const rows = await pool.query(format(`INSERT INTO docentes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
@@ -50,7 +51,7 @@ router.post('/signin', async (req, res) => {
         }
 
     } else if (rol == 'ADMINISTRATIVO') {
-
+        console.log(rol);
         try {
             const rows = await pool.query(format(`INSERT INTO administrativos ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
