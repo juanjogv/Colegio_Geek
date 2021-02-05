@@ -39,3 +39,21 @@ p{
   font-size:22px;
   font-weight: 400;  
 }
+
+
+a, .btn-log{
+  font-size:20px;
+  color: var(--Cgrey);
+}
+
+a:hover{
+  color: var(--Cgreen);
+}
+
+input[type='file'] {
+  color: rgba(0, 0, 0, 0)
+}
+
+#form{
+  left: 5%;
+}

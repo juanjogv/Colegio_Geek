@@ -7,12 +7,11 @@ import Form from "../components/Form";
 import logo from "../images/logo.png";
 
 
-const GroupRegister=()=>{
-  const camposInputs=[{codigo_grupo:'Código grupo'}];
-  const inputType=['text'];
-  const jor={jornada:['MAÑANA','TARDE']};
-  const validation=[{required: true}];
-  const errMessage=['Ingrese código del grupo'];
+const ChangePassword=()=>{
+  const camposInputs=[{nueva_contrasena:'Nueva contraseña'},{repetir_contrasena:'Repetir contraseña'}];
+  const inputType=['password','password'];
+  const validation=[{required: true, minLength: 6},{required: true, minLength: 6,pattern:''}];
+  const errMessage=['Ingrese una contraseña valida','Los campos deben ser iguales'];
 
 //   useEffect(() => {
 //     if (Cookies.get('corre_electronico')) {
@@ -27,18 +26,17 @@ const GroupRegister=()=>{
       </div>
       <div className="col-12">
         <Form
-          page="4"
+          page="1"
           camps={camposInputs}
           inTypes={inputType}
           vals={validation}
           errMes={errMessage}
-          j={jor}
-          endpoint="/group-register"
+          endpoint="/password"
           method="post"
-          btnText="Register"
+          btnText="Change"
         />
       </div>
     </div>
   );
 }
-export default GroupRegister;
+export default ChangePassword;
