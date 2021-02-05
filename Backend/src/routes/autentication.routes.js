@@ -18,7 +18,7 @@ router.post('/signin', async (req, res) => {
     const codigo_usuario = await helpers.createCodigoUsuario();
 
     const newUser = [
-        rol, codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
+        codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
         direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
         foto_usuario, copia_documento, pass_usuario
     ];
@@ -29,20 +29,23 @@ router.post('/signin', async (req, res) => {
         try {
             const rows = await pool.query(format(`INSERT INTO estudiantes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario, id_grupo) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario, id_grupo) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
+            console.log(error);
             res.json("Error");
         }
 
     } else if (rol == 'DOCENTE') {
 
         try {
+
             const rows = await pool.query(format(`INSERT INTO docentes ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
+            console.log(error);
             res.json("Error");
         }
 
@@ -51,9 +54,10 @@ router.post('/signin', async (req, res) => {
         try {
             const rows = await pool.query(format(`INSERT INTO administrativos ( codigo_usuario, tipo_documento, documento_usuario, nombre_usuario, apellido_usuario, genero, fecha_nacimiento,
                 direccion_residencia, ciudad_residencia, telefono_residencia, correo_electronico, telefono_celular,
-                foto_estudiante, copia_documento, pass_usuario) VALUES %L`, [newUser]));
+                foto_usuario, copia_documento, pass_usuario) VALUES %L`, [newUser]));
             res.status(201).json("Usuario registrado");
         } catch (error) {
+            console.log(error);
             res.json("Error");
         }
 

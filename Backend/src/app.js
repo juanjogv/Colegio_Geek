@@ -4,10 +4,13 @@ const multer = require('multer')
 var cors = require('cors');
 const morgan = require('morgan')
 const { port } = require('./config');
+const path = require('path');
 
 const app = express();
-app.use(cors({origin: 'http://localhost:3000',credentials: true})); 
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 // app.use(cors({origin: '*'}));
+
+app.use(express.static(path.join(__dirname, 'build')))
 
 const multerMid = multer({
     storage: multer.memoryStorage(),

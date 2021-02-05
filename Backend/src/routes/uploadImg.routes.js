@@ -23,13 +23,6 @@ const multer = Multer({
 const bucket = storage.bucket(process.env.GCS_BUCKET);
 
 router.post('/imageupload', multer.single('file'), async (req, res) => {
-<<<<<<< HEAD
-    UploadToBucket(req)
-    res.json('ok');
-})
-
-module.exports = router;
-=======
     const newFileName = uuidv1() + "-" + req.file.originalname
     const blob = bucket.file(newFileName)
     const blobStream = blob.createWriteStream({
@@ -42,4 +35,3 @@ module.exports = router;
     blobStream.end(req.file.buffer)
 });
 module.exports = router;
->>>>>>> 5d32d6f7b29aa1892e807bfd18b53ccd73c56f86
