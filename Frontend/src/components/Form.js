@@ -8,6 +8,7 @@ const cookies = new Cookies();
 
 const Form=(props)=>{
   const {page,camps,inTypes,btnText,vals,errMes,endpoint,id} = props;
+  const urlBack='http://35.238.38.27:8080'
   let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
   const history = useHistory();
@@ -27,19 +28,19 @@ const Form=(props)=>{
         console.log(urlFiles[0]);    
         info.foto_usuario=`${urlFiles[0]}`;  info.copia_documento=`${urlFiles[1]}`;
         console.log(info)     
-        Axios.post(`http://localhost:8080${endpoint}`,info);
+        Axios.post(`${urlBack + endpoint}`,info);
         window.alert('Usuario Creado');
       }
       
       else if (endpoint ==='/login'){
-        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+        const {data}=await Axios.post(`${urlBack + endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         // history.push("/")
       }
       
       else if(endpoint !=='/signin' && endpoint !=='/login'){
-        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+        const {data}=await Axios.post(`${urlBack + endpoint}`,info);
         if(data!=undefined){
           if(endpoint==='/password' && info.contrasena===info.repetir){
             alert('Contraseña actualizada');

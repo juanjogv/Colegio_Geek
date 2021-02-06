@@ -13,6 +13,7 @@ const GroupRegister=()=>{
   const [loading,setLoading] = useState (true);
   const [list, setList]=useState([]);
 
+  const urlBack='http://35.238.38.27:8080'
   const camposInputs=[{codigo_grupo:'Código grupo'}];
   const grupos={grupo:['sexto', 'septimo', 'octavo', 'noveno', 'decimo', 'once']};
   const jor={jornada:['mañana','tarde']};
@@ -25,7 +26,7 @@ const GroupRegister=()=>{
 //         window.location.href = "../profile"
 //     }
     const getData = async () => {
-      const {data}= await Axios.get(`http://localhost:8080/teachers`);            
+      const {data}= await Axios.get(`${urlBack}/teachers`);            
       setList(data);
     }
     if(loading){
