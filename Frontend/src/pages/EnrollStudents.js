@@ -16,7 +16,7 @@ const EnrollStudent=()=>{
     //         window.location.href = "../profile"
     //     }
     const getData = async () => {
-      const {data}= await Axios.get(`http://localhost:8080/students`);            
+      const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
       setStudentList(data);
     }
     if(loading){
@@ -25,13 +25,15 @@ const EnrollStudent=()=>{
     }
   },[]);
 
-  return (
+  return (    
     <div className="row align-items-center">
+      {console.log(studentList)}
       <div className="col-12">
         <img className="Llogo shadow rounded my-5" src={logo} />
       </div>
       <div className="col-12">
         <Table
+          studentList={studentList}
           // page="4"
           // camps={camposInputs}
           // inTypes={inputType}
