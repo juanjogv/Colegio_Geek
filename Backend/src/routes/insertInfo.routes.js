@@ -68,8 +68,7 @@ router.post('/materias', async (req, res) => {
     console.log(newGrupo)
     const rows = await pool.query(format(`INSERT INTO materias (codigo_materia, nombre_materia, sexto, septimo, octavo,noveno, decimo,once,id_profesor) VALUES %L`, [newGrupo]));
 
-  console.log('ejecutado')
-
+  console.log('ejecutado');
 
 });
 

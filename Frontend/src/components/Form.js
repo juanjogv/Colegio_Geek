@@ -35,7 +35,9 @@ const Form=(props)=>{
         const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
-        // history.push("/")
+        if (data!=null || data!=undefined){
+        history.push("/admin-board/")
+      }
       }
       
       else if(endpoint !=='/signin' && endpoint !=='/login'){
