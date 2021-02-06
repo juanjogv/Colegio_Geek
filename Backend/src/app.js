@@ -7,8 +7,8 @@ const { port } = require('./config');
 const path = require('path');
 
 const app = express();
-//app.use(cors({ origin: 'https://colegiogeek.tech', credentials: true }));
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://colegiogeek.tech', credentials: true }));
+//app.use(cors({ origin: '*' }));
 
 app.use(express.static(path.join(__dirname, 'build')));
 
