@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import AdminBoard from "./pages/AdminBoard";
 import UserRegister from "./pages/UserRegister";
 import GroupRegister from "./pages/GroupRegister";
+import EnrollStudents from "./pages/EnrollStudents";
 import SubjectRegister from "./pages/SubjectRegister";
 import ChangePassword from "./pages/ChangePassword";
 import StudentBoard from "./pages/StudentBoard";
@@ -47,6 +48,11 @@ const App = () => {
                 atActive={{ opacity: 1 }}
               />
               <AnimatedRoute path="/admin-board/change-password" component={ChangePassword}         
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1}}
+                atActive={{ opacity: 1 }}
+              />
+              <AnimatedRoute path="/admin-board/enroll-students" component={EnrollStudents}         
                 atEnter={{ opacity: 0 }}
                 atLeave={{ opacity: 1}}
                 atActive={{ opacity: 1 }}

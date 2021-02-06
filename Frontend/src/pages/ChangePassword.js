@@ -8,9 +8,9 @@ import logo from "../images/logo.png";
 
 
 const ChangePassword=()=>{
-  const camposInputs=[{nueva_contrasena:'Nueva contraseña'},{repetir_contrasena:'Repetir contraseña'}];
+  const camposInputs=[{contrasena:'Nueva contraseña'},{repetir:'Repetir contraseña'}];
   const inputType=['password','password'];
-  const validation=[{required: true, minLength: 6},{required: true, minLength: 6,pattern:''}];
+  const validation=[{required: true, minLength: 6},{required: true, minLength: 6}];
   const errMessage=['Ingrese una contraseña valida','Los campos deben ser iguales'];
 
 //   useEffect(() => {
@@ -26,7 +26,7 @@ const ChangePassword=()=>{
       </div>
       <div className="col-12">
         <Form
-          page="1"
+          page="5"
           camps={camposInputs}
           inTypes={inputType}
           vals={validation}

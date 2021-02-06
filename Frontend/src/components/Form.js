@@ -7,34 +7,47 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const Form=(props)=>{
-  const {page,camps,inTypes,btnText,vals,errMes,endpoint} = props;
+  const {page,camps,inTypes,btnText,vals,errMes,endpoint,id} = props;
   let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
   const history = useHistory();
   
-  const fSend = async (data) => {
-    console.log(data);
+  const fSend = async (info) => {
+    console.log(info);
     try {
       if(endpoint ==='/signin'){        
         const files=[];
         let ind=0, urlFiles=['',''];
-        if(data.copia_documento[0] !== undefined) { files.push(data.copia_documento[0]); ind=1}
-        if(data.foto_usuario[0] !== undefined) { files.push(data.foto_usuario[0]);ind=0}
+        if(info.copia_documento[0] !== undefined) { files.push(info.copia_documento[0]); ind=1}
+        if(info.foto_usuario[0] !== undefined) { files.push(info.foto_usuario[0]);ind=0}
         await Promise.all(files.map(async (file,index)=>{
           urlFiles[index+ind]=`${await fileSend(file)}`;
         }));
         console.log(urlFiles[1]);
         console.log(urlFiles[0]);    
-        data.foto_usuario=`${urlFiles[0]}`;  data.copia_documento=`${urlFiles[1]}`;
-        console.log(data)     
-        Axios.post(`http://localhost:8080${endpoint}`,data); 
-        cookies.set('correo_electronico', data.correo_electronico, { path: "/" });
-        history.push("/")
+        info.foto_usuario=`${urlFiles[0]}`;  info.copia_documento=`${urlFiles[1]}`;
+        console.log(info)     
+        Axios.post(`http://localhost:8080${endpoint}`,info);
         window.alert('Usuario Creado');
       }
-      else if(endpoint !=='/signin'){
-        const res=Axios.post(`http://localhost:8080${endpoint}`,data);
-        console.log(res.data);
+      
+      else if (endpoint ==='/login'){
+        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+        console.log(data);         
+        // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
+        // history.push("/")
+      }
+      
+      else if(endpoint !=='/signin' && endpoint !=='/login'){
+        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+        if(data!=undefined){
+          if(endpoint==='/password' && info.contrasena===info.repetir){
+            alert('Contraseña actualizada');
+          }else if(endpoint==='/password' && info.contrasena!==info.repetir){
+            alert('Verifique que los campos ingresados sean iguales');
+          }
+        }
+        console.log(data);
       }
     }
     catch (error) {
@@ -131,11 +144,15 @@ const Form=(props)=>{
 
   
   if(page=="1"){
+    const {uTypes} = props;
     arrEr=[errors.correo_electronico, errors.contrasena];
     return (    
       <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}   
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}
+          <div className="d-flex justify-content-center">
+            {radioMaker(Object.keys(uTypes),uTypes.rol)}
+          </div>   
           {/* <Redirect to='/student-board'>       */}
             <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
           {/* </Redirect> */}
@@ -210,8 +227,22 @@ const Form=(props)=>{
           <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>
+    );
+  }
+  if(page=="5"){
+    arrEr=[errors.correo_electronico, errors.contrasena];
+    return (    
+      <div className="container border form-color p-3">
+        <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}  
+          {/* <Redirect to='/student-board'>       */}
+            <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
+          {/* </Redirect> */}
+        </form>
+      </div>
       );
-  }  
+  }
+  
 }
 
 export default Form;
