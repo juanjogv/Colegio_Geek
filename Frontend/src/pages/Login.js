@@ -41,7 +41,7 @@ const Login=()=>{
           vals={validation}
           uTypes={userType}
           errMes={errMessage}
-          endpoint="/login"
+          endpoint="/login/"
           method="post"
           btnText="Login"
         />

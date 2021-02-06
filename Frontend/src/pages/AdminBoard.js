@@ -10,7 +10,7 @@ const AdminBoard=({children})=>{
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
   const urlText=['Inicio','Grupos','Matricular Grupos','Registrar Usuarios','Materias','Cambiar clave'];
-  const url=['admin-board/','admin-board/group-register','admin-board/enroll-students','admin-board/user-register','admin-board/subject-register','admin-board/change-password']
+  const url=['admin-board/','admin-board/group-register/','admin-board/enroll-students/','admin-board/user-register/','admin-board/subject-register/','admin-board/change-password/']
 
   // useEffect(() => {
   //   if (!cookies.get('correo_electronico')) {

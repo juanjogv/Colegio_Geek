@@ -59,7 +59,7 @@ const UserRegister=()=>{
           vals={validation}
           errMes={errMessage}
           files={file}
-          endpoint="/signin"
+          endpoint="/signin/"
           method="post"
           btnText="Register"
         />

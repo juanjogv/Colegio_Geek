@@ -10,7 +10,7 @@ const StudentBoard=()=>{
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
   const urlText=['Inicio','Mis Notas','Mis Materias','Historial','Cambiar clave'];
-  const url=['student-board/','student-board/grades','student-board/signatures','student-board/history','student-board/password']
+  const url=['student-board/','student-board/grades/','student-board/signatures','student-board/history/','student-board/password/']
 
   // useEffect(() => {
   //   if (!cookies.get('correo_electronico')) {

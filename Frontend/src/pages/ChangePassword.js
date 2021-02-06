@@ -31,7 +31,7 @@ const ChangePassword=()=>{
           inTypes={inputType}
           vals={validation}
           errMes={errMessage}
-          endpoint="/password"
+          endpoint="/password/"
           method="post"
           btnText="Change"
         />

@@ -10,7 +10,7 @@ const TeacherBoard=()=>{
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
   const urlText=['Inicio','Mis grupos','Mis Materias','Seguimientos','Cambiar clave'];
-  const url=['teacher-board/','teacher-board/grades','teacher-board/signatures','teacher-board/history','teacher-board/password']
+  const url=['teacher-board/','teacher-board/grades/','teacher-board/signatures/','teacher-board/history/','teacher-board/password/']
 
   // useEffect(() => {
   //   if (!cookies.get('correo_electronico')) {

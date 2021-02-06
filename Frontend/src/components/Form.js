@@ -16,7 +16,7 @@ const Form=(props)=>{
   const fSend = async (info) => {
     console.log(info);
     try {
-      if(endpoint ==='/signin'){        
+      if(endpoint ==='/signin/'){        
         const files=[];
         let ind=0, urlFiles=['',''];
         if(info.copia_documento[0] !== undefined) { files.push(info.copia_documento[0]); ind=1}
@@ -32,19 +32,20 @@ const Form=(props)=>{
         window.alert('Usuario Creado');
       }
       
-      else if (endpoint ==='/login'){
+      else if (endpoint ==='/login/'){
         const {data}=await Axios.post(`${urlBack + endpoint}`,info);
-        console.log(data);         
+        console.log(data);
+        <Redirect to='/admin-board/'></Redirect>         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         // history.push("/")
       }
       
-      else if(endpoint !=='/signin' && endpoint !=='/login'){
+      else if(endpoint !=='/signin/' && endpoint !=='/login/'){
         const {data}=await Axios.post(`${urlBack + endpoint}`,info);
         if(data!=undefined){
-          if(endpoint==='/password' && info.contrasena===info.repetir){
+          if(endpoint==='/password/' && info.contrasena===info.repetir){
             alert('Contraseña actualizada');
-          }else if(endpoint==='/password' && info.contrasena!==info.repetir){
+          }else if(endpoint==='/password/' && info.contrasena!==info.repetir){
             alert('Verifique que los campos ingresados sean iguales');
           }
         }
@@ -62,7 +63,7 @@ const Form=(props)=>{
     formData.append("file", file);
     let res=''
     try {
-     res = await Axios.post(`http://localhost:8080/imageupload`,formData); 
+     res = await Axios.post(`${urlBackimageupload}/`,formData); 
            
     }catch (error) {
       console.log('Error updating file.');

@@ -30,7 +30,7 @@ app.use(morgan('dev'));
 app.use(multerMid.single('file'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+// app.use(cors());
 
 app.use(require('./routes/insertInfo.routes'));
 app.use(require('./routes/getInfo.routes'));
