@@ -9,8 +9,8 @@ import Dashboard from "../components/Dashboard";
 const AdminBoard=({children})=>{
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
-  const urlText=['Inicio','Grupos','Matricular Grupos','Registrar Usuarios','Cambiar clave'];
-  const url=['admin-board/','admin-board/group-register','admin-board/enroll','admin-board/user-register','admin-board/change-password']
+  const urlText=['Inicio','Grupos','Matricular Grupos','Registrar Usuarios','Materias','Cambiar clave'];
+  const url=['admin-board/','admin-board/group-register','admin-board/enroll','admin-board/user-register','admin-board/subject-register','admin-board/change-password']
 
   // useEffect(() => {
   //   if (!cookies.get('correo_electronico')) {
@@ -24,9 +24,9 @@ const AdminBoard=({children})=>{
   };
 
   return (
-    <div className="row h-100 m-0 ">
-      <div className={`p-0 ${toggled ? 'toggled' : ''}`} id='board'>
-        <NavMenu
+    <div className="row h-100 m-0 justify-content-center">
+      <div className={`p-0 ${toggled ? 'toggled' : ''} col-1 col-md-2`} id='board'>
+        <NavMenu id='navmenu'
           collapsed={collapsed}
           toggled={toggled}
           handleToggleSidebar={handleToggleSidebar}
@@ -37,7 +37,7 @@ const AdminBoard=({children})=>{
           handleToggleSidebar={handleToggleSidebar}
         />
       </div>
-      <div id='form' className="col-10 col-sm-11 col-md-7 col-lg-8">{children}</div>
+      <div id='form' className="col-10 col-sm-11 col-md-7 col-lg-8 p-0">{children}</div>
     </div>
   );
 }

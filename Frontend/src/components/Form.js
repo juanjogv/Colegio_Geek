@@ -13,6 +13,7 @@ const Form=(props)=>{
   const history = useHistory();
   
   const fSend = async (data) => {
+    console.log(data);
     try {
       if(endpoint ==='/signin'){        
         const files=[];
@@ -119,6 +120,15 @@ const Form=(props)=>{
     });
   }
 
+  const selectMaker=(tList)=>{
+    return tList.map((t,ind)=>{
+      return(
+        <option key={ind} value={t.id_docente}>{t.nombre}</option>
+      );
+    });
+  }
+
+
   
   if(page=="1"){
     arrEr=[errors.correo_electronico, errors.contrasena];
@@ -161,7 +171,7 @@ const Form=(props)=>{
   }
   
   else if(page=="3"){
-    const {grA} = props;
+    const {grA,tList} = props;
     arrEr=[errors.codigo_materia, errors.nombre_materia];
     return (    
       <div className="container border form-color p-3">
@@ -169,7 +179,11 @@ const Form=(props)=>{
           {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
           <div className="d-flex justify-content-center">
             {checkMaker('grupos',grA)}
-          </div>   
+          </div>
+          <label htmlFor="list">Titular</label>
+          <select id="list" name="id_profesor" ref={register}>
+            {selectMaker(tList)}
+          </select>   
           <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>
@@ -177,21 +191,27 @@ const Form=(props)=>{
   }
 
   else if(page=="4"){
-    const {j} = props;
+    const {j,tList,grades} = props;
     arrEr=[errors.codigo_grupo];
     return (    
       <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}       
-          <div className="d-flex justify-content-center">
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}
+          <label htmlFor="list">Titular</label>
+          <select id="list" name="id_profesor" ref={register}>
+            {selectMaker(tList)}
+          </select>
+          <div className="d-flex justify-content-center mt-5">
             {radioMaker(Object.keys(j),j.jornada)}
-          </div>   
+          </div>
+          <div className="d-flex justify-content-center mt-4">
+            {radioMaker(Object.keys(grades),grades.grupo)}
+          </div>    
           <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>
       );
-  }
-  
+  }  
 }
 
 export default Form;

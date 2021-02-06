@@ -4,7 +4,7 @@ $submenu-bg-color-collapsed: rgba(29, 29, 29, 0.95);
 $sidebar-color: #adadad;
 $highlight-color: #d8d8d8;
 $icon-bg-color: rgba(255, 255, 255, 0.05);
-$icon-size: 35px;
+$icon-size: 30px;
 
 @import '~react-pro-sidebar/dist/scss/styles.scss';
 
@@ -38,11 +38,13 @@ a:hover {
 
 #board {
   height: 100%;
+  position: fixed;
+  left: 0%;
 
   .btn-toggle {
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     background: var(--Cgrey);
     color: #fff;
     text-align: center;
@@ -63,7 +65,7 @@ a:hover {
       border-radius: 40px;
       text-decoration: none;
       margin: 0 auto;
-      height: 35px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -76,8 +78,8 @@ a:hover {
     .sidebar-btn {
       display: inline-block;
       border-radius: 50%;
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       line-height: 40px;
       padding: 0;
     }
@@ -85,6 +87,7 @@ a:hover {
 
   
   @media (max-width: 767.98px) {
+    position: inherit;
     overflow-x: hidden;
     header {
       h1 {

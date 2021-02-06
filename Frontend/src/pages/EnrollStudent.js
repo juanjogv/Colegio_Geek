@@ -3,30 +3,20 @@ import Axios from "axios";
 import {Link} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import Form from "../components/Form";
+import Table from "../components/Table";
 
-import logo from "../images/logo.png";
-
-
-const GroupRegister=()=>{
-
+const EnrollStudent=()=>{
   const [loading,setLoading] = useState (true);
-  const [list, setList]=useState([]);
-
-  const camposInputs=[{codigo_grupo:'Código grupo'}];
-  const grupos={grupo:['sexto', 'septimo', 'octavo', 'noveno', 'decimo', 'once']};
-  const jor={jornada:['mañana','tarde']};
-  const inputType=['text'];
-  const validation=[{required: true}];
-  const errMessage=['Ingrese código del grupo'];
+  const [studentList, setStudentList]=useState([]);
+  const [groupList, setGroupList]=useState([]);
 
   useEffect(async() => {
-//     if (Cookies.get('corre_electronico')) {
-//         window.location.href = "../profile"
-//     }
+    //     if (Cookies.get('corre_electronico')) {
+    //         window.location.href = "../profile"
+    //     }
     const getData = async () => {
-      const {data}= await Axios.get(`http://localhost:8080/teachers`);            
-      setList(data);
+      const {data}= await Axios.get(`http://localhost:8080/students`);            
+      setStudentList(data);
     }
     if(loading){
       getData();
@@ -40,10 +30,9 @@ const GroupRegister=()=>{
         <img className="Llogo shadow rounded " src={logo} />
       </div>
       <div className="col-12">
-        <Form
+        <Table
           page="4"
           camps={camposInputs}
-          grades={grupos}
           inTypes={inputType}
           vals={validation}
           errMes={errMessage}
@@ -56,5 +45,8 @@ const GroupRegister=()=>{
       </div>
     </div>
   );
+
+
+
 }
-export default GroupRegister;
+export default EnrollStudent;

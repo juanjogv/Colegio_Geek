@@ -59,7 +59,7 @@ router.post('/signin', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { rol, correo_electronico, contrasena_usuario } = req.body;
 
-    if (rol == 'estudiante') {
+    if (rol == 'ESTUDIANTE') {
 
         const { rows } = await pool.query(`SELECT * FROM estudiantes WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {
@@ -69,7 +69,7 @@ router.post('/login', async (req, res) => {
             res.json(rows);
         }
 
-    } else if (rol == 'docente') {
+    } else if (rol == 'DOCENTE') {
 
         const { rows } = await pool.query(`SELECT * FROM docentes WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
             res.json(rows);
         }
 
-    } else if (rol == "administrativo") {
+    } else if (rol == "ADMINISTRATIVO") {
 
         const { rows } = await pool.query(`SELECT * FROM administrativos WHERE correo_electronico = '${correo_electronico}'`);
         if (rows.length > 0) {

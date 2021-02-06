@@ -10,7 +10,9 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 // app.use(cors({origin: '*'}));
 
-app.use(express.static(path.join(__dirname, 'build')))
+app.use(express.static(path.join(__dirname, 'build')));
+
+
 
 const multerMid = multer({
     storage: multer.memoryStorage(),
@@ -25,12 +27,13 @@ app.set('port', port);
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(multerMid.single('file'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(multerMid.single('file'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use(require('./routes/insertInfo.routes'));
+app.use(require('./routes/getInfo.routes'));
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/autentication.routes'));
 app.use(require('./routes/uploadImg.routes'));

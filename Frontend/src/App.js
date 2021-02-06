@@ -31,32 +31,42 @@ const App = () => {
         <Route exact path="/" component={Login} />
         <Route exact path="/admin-board/:path?">
           <AdminBoard>
-            <Switch>
-              <AnimatedRoute exact path="/admin-board/user-register" component={UserRegister}/>
-              <AnimatedRoute path="/admin-board/group-register" component={GroupRegister}/>
-              <AnimatedRoute path="/admin-board/subject-register" component={SubjectRegister}/>
-              <AnimatedRoute path="/admin-board/change-password" component={ChangePassword}/>
-            </Switch>
+              <AnimatedRoute exact path="/admin-board/user-register" component={UserRegister}         
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1}}
+                atActive={{ opacity: 1 }}
+              />
+              <AnimatedRoute path="/admin-board/group-register" component={GroupRegister}         
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1}}
+                atActive={{ opacity: 1 }}
+              />
+              <AnimatedRoute path="/admin-board/subject-register" component={SubjectRegister}         
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1}}
+                atActive={{ opacity: 1 }}
+              />
+              <AnimatedRoute path="/admin-board/change-password" component={ChangePassword}         
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1}}
+                atActive={{ opacity: 1 }}
+              />
           </AdminBoard>
         </Route>  
         <Route exact path="/teacher-board/:path?">
           <TeacherBoard>
-            <Switch>
               {/* <Route exact path="/teacher-board/user-register" component={UserRegister}/>
               <Route exact path="/teacher-board/group-register" component={GroupRegister}/>
               <Route exact path="/teacher-board/subject-register" component={SubjectRegister}/> */}
-              <AnimatedRoute path="/teacher-board/change-password" component={ChangePassword}/>
-            </Switch>
+              <Route path="/teacher-board/change-password" component={ChangePassword}/>
           </TeacherBoard>
         </Route>  
         <Route exact path="/student-board/:path?">
           <StudentBoard>
-            <Switch>
               {/* <Route exact path="/student-board/user-register" component={UserRegister}/>
               <Route exact path="/student-board/group-register" component={GroupRegister}/>
               <Route exact path="/student-board/subject-register" component={SubjectRegister}/> */}
-              <AnimatedRoute path="/student-board/change-password" component={ChangePassword}/>
-            </Switch>
+              <Route path="/student-board/change-password" component={ChangePassword}/>
           </StudentBoard>
         </Route>
       </AnimatedSwitch>
