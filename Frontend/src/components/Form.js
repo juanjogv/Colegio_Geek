@@ -36,8 +36,19 @@ const Form=(props)=>{
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         if (data!=null || data!=undefined){
-        history.push("/admin-board/")
-      }
+          console.log(info.rol)
+          switch (info.rol) {
+            case 'ESTUDIANTE':
+              history.push("/student-board/")
+              break;
+            case 'ADMINISTRATIVO':
+              history.push("/admin-board/")
+              break;
+            case 'DOCENTE':
+              history.push("/teacher-board/")
+              break;
+          }        
+        }
       }
       
       else if(endpoint !=='/signin' && endpoint !=='/login'){
