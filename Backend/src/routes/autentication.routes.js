@@ -68,7 +68,7 @@ router.post('/signin', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { rol, correo_electronico, contrasena_usuario } = req.body;
-
+    console.log(rol, correo_electronico, contrasena_usuario)
     if (rol == 'ESTUDIANTE') {
 
         const { rows } = await pool.query(`SELECT * FROM estudiantes WHERE correo_electronico = '${correo_electronico}'`);
@@ -77,7 +77,7 @@ router.post('/login', async (req, res) => {
             const validPass = await helpers.matchPassword(contrasena_usuario, savedpass);
             rows.push({ validPass: validPass })
             res.json(rows);
-        }
+        }else{res.json('error')}
 
     } else if (rol == 'DOCENTE') {
 
@@ -87,7 +87,7 @@ router.post('/login', async (req, res) => {
             const validPass = await helpers.matchPassword(contrasena_usuario, savedpass);
             rows.push({ validPass: validPass })
             res.json(rows);
-        }
+        }else{res.json('error')}
 
     } else if (rol == "ADMINISTRATIVO") {
 
@@ -97,11 +97,35 @@ router.post('/login', async (req, res) => {
             const validPass = await helpers.matchPassword(contrasena_usuario, savedpass);
             rows.push({ validPass: validPass })
             res.json(rows);
-        }
-
+        }else{res.json('error')}
     }
+});
 
+router.post('/password', async (req, res) => {
+    const { rol, id, contrasena, repetir} = req.body;
 
+    const pass_usuario = await helpers.encryptPassword(contrasena);
+
+    if(contrasena===repetir){
+        if (rol == 'ESTUDIANTE') {
+
+            const { rows } = await pool.query(`UPDATE estudiantes SET pass_usuario='${pass_usuario}' WHERE id_estudiante='${id}'`);
+            res.json(rows);
+            
+        } else if (rol == 'DOCENTE') {
+    
+            const { rows } = await pool.query(`UPDATE docentes SET pass_usuario='${pass_usuario}' WHERE id_docente='${id}'`);
+            res.json(rows);
+    
+        } else if (rol == "ADMINISTRATIVO") {
+    
+            const { rows } = await pool.query(`UPDATE administrativos SET pass_usuario='${pass_usuario}' WHERE id_administrativo='${id}'`);
+            res.json(rows);   
+        }
+    }
+    else {
+        res.json('Error en contraseña');
+    }
 });
 
 
