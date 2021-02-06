@@ -191,7 +191,7 @@ const Form=(props)=>{
   }
 
   else if(page=="4"){
-    const {j,tList} = props;
+    const {j,tList,grades} = props;
     arrEr=[errors.codigo_grupo];
     return (    
       <div className="container border form-color p-3">
@@ -201,9 +201,12 @@ const Form=(props)=>{
           <select id="list" name="id_profesor" ref={register}>
             {selectMaker(tList)}
           </select>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mt-5">
             {radioMaker(Object.keys(j),j.jornada)}
-          </div>   
+          </div>
+          <div className="d-flex justify-content-center mt-4">
+            {radioMaker(Object.keys(grades),grades.grupo)}
+          </div>    
           <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
         </form>
       </div>

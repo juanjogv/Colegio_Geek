@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Form from "../components/Form";
-
 import logo from "../images/logo.png";
 
 
