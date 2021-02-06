@@ -32,12 +32,24 @@ const Form=(props)=>{
         window.alert('Usuario Creado');
       }
       
-      else if (endpoint ==='/login/'){
-        const {data}=await Axios.post(`${urlBack + endpoint}`,info);
-        console.log(data);
-        <Redirect to='/admin-board/'></Redirect>         
+      else if (endpoint ==='/login'){
+        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+        console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
-        // history.push("/")
+        if (data!=null || data!=undefined){
+          console.log(info.rol)
+          switch (info.rol) {
+            case 'ESTUDIANTE':
+              history.push("/student-board/")
+              break;
+            case 'ADMINISTRATIVO':
+              history.push("/admin-board/")
+              break;
+            case 'DOCENTE':
+              history.push("/teacher-board/")
+              break;
+          }        
+        }
       }
       
       else if(endpoint !=='/signin/' && endpoint !=='/login/'){
