@@ -11,7 +11,7 @@ const SubjectRegister=()=>{
   const [loading,setLoading] = useState (true);
   const [list, setList]=useState([]);
 
-  const urlBack='http://35.238.38.27:8080/'
+  const urlBack='http://35.237.174.137:8080'
   const camposInputs=[{codigo_materia:'Código de la asignatura'},{nombre_materia:'Nombre de la asignatura'}];
   const inputType=['text','text'];
   const validation=[{required: true},{required: false, pattern: /^[0-9A-Za-záéíóúÁÉÍÓÚ .-]+$/i}];

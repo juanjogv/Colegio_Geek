@@ -8,7 +8,7 @@ const cookies = new Cookies();
 
 const Form=(props)=>{
   const {page,camps,inTypes,btnText,vals,errMes,endpoint,id} = props;
-  const urlBack='http://35.238.38.27:8080'
+  const urlBack='http://35.237.174.137:8080'
   let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
   const history = useHistory();
@@ -32,8 +32,8 @@ const Form=(props)=>{
         window.alert('Usuario Creado');
       }
       
-      else if (endpoint ==='/login'){
-        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
+      else if (endpoint ==='/login/'){
+        const {data}=await Axios.post(`${urlBack+endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         if (data!=null || data!=undefined){

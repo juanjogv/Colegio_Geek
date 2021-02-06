@@ -11,7 +11,7 @@ const EnrollStudent=()=>{
   const [studentList, setStudentList]=useState([]);
   const [groupList, setGroupList]=useState([]);
 
-  const urlBack='http://35.238.38.27:8080/'
+  const urlBack='http://35.237.174.137:8080'
 
   useEffect(async() => {
     //     if (Cookies.get('corre_electronico')) {
