@@ -36,7 +36,7 @@ const Form=(props)=>{
         const {data}=await Axios.post(`${urlBack+endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
-        if (data!=null && data!=undefined && data!='error'){
+        if (data!=null && data!=undefined && data[1].validPass===true){
           console.log(info.rol)
           switch (info.rol) {
             case 'ESTUDIANTE':
