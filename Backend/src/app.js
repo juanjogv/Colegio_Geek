@@ -30,10 +30,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors());
 
-app.use(require('./routes/insertInfo.routes'))
+app.use(require('./routes/insertInfo.routes'));
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/autentication.routes'));
-app.use(require('./routes/mailer.routes'))
-app.use(require('./routes/uploadImg.routes'))
+app.use(require('./routes/uploadImg.routes'));
 
 module.exports = app;
