@@ -11,26 +11,17 @@ const EnrollStudent=()=>{
   const [studentList, setStudentList]=useState([]);
   const [listColumns, setListColumns]=useState([]);
 
-<<<<<<< HEAD
   const urlBack='http://35.237.174.137:8080'
-
-  useEffect(async() => {
-=======
   let cols=[];
 
   useEffect(() => {
     setLoading(true);
->>>>>>> frontend
     //     if (Cookies.get('corre_electronico')) {
     //         window.location.href = "../profile"
     //     }
     const getData = async () => {
-<<<<<<< HEAD
-      const {data}= await Axios.get(`${urlBack}/students/`);            
-      setStudentList(data);
-=======
       try {
-        const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
+        const {data}= await Axios.get(`${urlBack}/students/`);              
         setStudentList(data);
         return (data[0]);
       } catch (error) {
@@ -39,7 +30,6 @@ const EnrollStudent=()=>{
       // const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
       // setStudentList(data);
       // return (data[0]);
->>>>>>> frontend
     }
 
     const getKeys=async ()=>{
@@ -79,8 +69,6 @@ const EnrollStudent=()=>{
       </div>
     </div>
   );
-
-
-
 }
+
 export default EnrollStudent;
