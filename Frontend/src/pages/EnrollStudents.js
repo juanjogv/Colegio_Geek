@@ -16,20 +16,14 @@ const EnrollStudent=()=>{
 
   useEffect(() => {
     setLoading(true);
-    //     if (Cookies.get('corre_electronico')) {
-    //         window.location.href = "../profile"
-    //     }
     const getData = async () => {
       try {
-        const {data}= await Axios.get(`${urlBack}/students/`);              
+        const {data}= await Axios.get(`${urlBack}/students-groups/`);              
         setStudentList(data);
         return (data[0]);
       } catch (error) {
         console.log(error)
       }
-      // const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
-      // setStudentList(data);
-      // return (data[0]);
     }
 
     const getKeys=async ()=>{

@@ -6,7 +6,6 @@ export const COLUMNS = [
     accessor: 'id'
   },  {
     Header: 'First Name',
-    Footer: 'First Name',
     accessor: 'first_name'
   },
   {
