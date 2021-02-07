@@ -8,16 +8,26 @@ import logo from "../images/logo.png";
 
 
 const ChangePassword=()=>{
+  const [profile,setProfile]=useState({});
+  const [loading,setLoading] = useState (true);
+
   const camposInputs=[{contrasena:'Nueva contraseña'},{repetir:'Repetir contraseña'}];
   const inputType=['password','password'];
   const validation=[{required: true, minLength: 6},{required: true, minLength: 6}];
   const errMessage=['Ingrese una contraseña valida','Los campos deben ser iguales'];
 
-//   useEffect(() => {
-//     if (Cookies.get('corre_electronico')) {
-//         window.location.href = "../profile"
-//     }
-// })
+  // useEffect(() => {
+  //   const getData=()=>{
+  //     setProfile({
+  //       correo_electronico: cookies.get('correo_electronico'),
+  //       rol_usuario: cookies.get('rol_usuario')
+  //     });
+  //   }
+  //   if(loading){
+  //     getData();
+  //     setLoading(false);
+  //   }    
+  // },[]);
 
   return (
     <div className="row align-items-center">
@@ -31,7 +41,8 @@ const ChangePassword=()=>{
           inTypes={inputType}
           vals={validation}
           errMes={errMessage}
-          endpoint="/password/"
+          profile={profile}
+          endpoint="/password"
           method="post"
           btnText="Change"
         />

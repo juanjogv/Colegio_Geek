@@ -4,9 +4,10 @@ import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
+
 
 const Form=(props)=>{
+  const cookies = new Cookies();
   const {page,camps,inTypes,btnText,vals,errMes,endpoint,id} = props;
   const urlBack='http://35.237.174.137:8080'
   let arrEr=[];
@@ -36,8 +37,13 @@ const Form=(props)=>{
         const {data}=await Axios.post(`${urlBack+endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
-        if (data!=null && data!=undefined && data[1].validPass===true){
+        if (data[1].validPass===true){
           console.log(info.rol)
+          cookies.set("nombre_usuario", data[0].nombre_usuario, { path: "/" })
+          cookies.set("apellido_usuario", data[0].apellido_usuario, { path: "/" })
+          cookies.set("correo_electronico", data[0].correo_electronico, { path: "/" })
+          cookies.set("foto_usuario", data[0].foto_usuario, { path: "/" })
+          cookies.set("rol_usuario", info.rol, { path: "/" })
           switch (info.rol) {
             case 'ESTUDIANTE':
               history.push("/student-board/")
@@ -52,7 +58,9 @@ const Form=(props)=>{
         }
       }
       
-      else if(endpoint !=='/signin/' && endpoint !=='/login/'){
+      else if(endpoint ==='/password'){
+        info.correo_electronico=cookies.get('correo_electronico');
+        info.rol=cookies.get('rol_usuario');
         const {data}=await Axios.post(`${urlBack + endpoint}`,info);
         if(data!=undefined){
           if(endpoint==='/password/' && info.contrasena===info.repetir){
@@ -60,6 +68,10 @@ const Form=(props)=>{
           }else if(endpoint==='/password/' && info.contrasena!==info.repetir){
             alert('Verifique que los campos ingresados sean iguales');
           }
+        }
+
+      else if(endpoint !=='/signin' && endpoint !=='/login' && endpoint !=='/password'){
+        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);        
         }
         console.log(data);
       }
@@ -249,10 +261,9 @@ const Form=(props)=>{
     return (    
       <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}  
-          {/* <Redirect to='/student-board'>       */}
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}
             <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
-          {/* </Redirect> */}
+          
         </form>
       </div>
       );

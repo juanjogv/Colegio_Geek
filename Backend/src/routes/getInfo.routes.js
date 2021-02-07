@@ -18,5 +18,10 @@ router.get('/groups', async (req, res) => {
   res.json(rows);
   });
 
+  router.get('/students-groups', async (req, res) => {
+    const {rows} = await pool.query(format(`SELECT  CONCAT(estudiantes.nombre_usuario, ' ', estudiantes.apellido_usuario) AS Nombre, estudiantes.documento_usuario AS Documento, grupos.codigo_grupo AS Cod_Grupo, grupos.grado FROM estudiantes LEFT JOIN estudiantes_grupos ON estudiantes.id_estudiante = estudiantes_grupos.id_estudiante LEFT JOIN grupos ON grupos.id_grupo = estudiantes_grupos.id_grupo`));
+    res.json(rows);
+    });
+
 
 module.exports = router;

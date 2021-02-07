@@ -29,8 +29,12 @@ const NavMenu=({collapsed,toggled,handleToggleSidebar,links,tLinks})=>{
   const dominio='localhost:3000/'
 
   const logOut = () => {
-      cookies.remove('correo_electronico');   
-      setStatus(true);   
+    cookies.remove("nombre_usuario")
+    cookies.remove("apellido_usuario")
+    cookies.remove("correo_electronico")
+    cookies.remove("foto_usuario")
+    cookies.remove("rol_usuario")  
+    setStatus(true);   
   }
   if(status){
     return(
