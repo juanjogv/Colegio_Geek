@@ -7,44 +7,64 @@ import Table from "../components/Table";
 import logo from "../images/logo.png";
 
 const EnrollStudent=()=>{
-  const [loading,setLoading] = useState (true);
+  const [loading,setLoading] = useState (false);
   const [studentList, setStudentList]=useState([]);
-  const [groupList, setGroupList]=useState([]);
+  const [listColumns, setListColumns]=useState([]);
 
-  useEffect(async() => {
+  let cols=[];
+
+  useEffect(() => {
+    setLoading(true);
     //     if (Cookies.get('corre_electronico')) {
     //         window.location.href = "../profile"
     //     }
     const getData = async () => {
-      const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
-      setStudentList(data);
+      try {
+        const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
+        setStudentList(data);
+        return (data[0]);
+      } catch (error) {
+        console.log(error)
+      }
+      // const {data}= await Axios.get(`http://localhost:8080/students-groups`);            
+      // setStudentList(data);
+      // return (data[0]);
     }
-    if(loading){
-      getData();
-      setLoading(false);
+
+    const getKeys=async ()=>{
+      try {
+        const res= await getData();  
+        Object.keys(res).map((keyName,index) => {
+          cols[index]={
+            Header:keyName,
+            accessor:keyName 
+          }
+        });
+        setListColumns(cols);
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false);
+      }    
     }
+    getKeys();
   },[]);
+
 
   return (    
     <div className="row align-items-center">
-      {console.log(studentList)}
       <div className="col-12">
         <img className="Llogo shadow rounded my-5" src={logo} />
       </div>
       <div className="col-12">
-        <Table
-          studentList={studentList}
+      {!loading && <Table
+          listRows={studentList}
+          listColumns={listColumns}
           // page="4"
-          // camps={camposInputs}
-          // inTypes={inputType}
-          // vals={validation}
-          // errMes={errMessage}
-          // j={jor}
-          // tList={list}
           // endpoint="/grupos"
           // method="post"
           // btnText="Register"
-        />
+        />}
       </div>
     </div>
   );

@@ -62,3 +62,12 @@ input[type='file'] {
   }
 
 }
+
+.profile-image, img{
+  border-radius: 50%;
+  width:250px
+}
+
+.card-body{
+  background-color:var(--CWgreen);
+}

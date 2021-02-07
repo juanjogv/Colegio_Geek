@@ -41,7 +41,7 @@ const GroupRegister=()=>{
       </div>
       <div className="col-12">
         <Form
-          id={user_id}
+          // id={user_id}
           page="4"
           camps={camposInputs}
           grades={grupos}

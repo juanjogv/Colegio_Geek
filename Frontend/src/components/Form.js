@@ -35,8 +35,11 @@ const Form=(props)=>{
         const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
         console.log(data);         
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
-        if (data!=null || data!=undefined){
+        if (data[1].validPass===true){
           console.log(info.rol)
+          cookies.set('nombre_usuario', data[0].nombre_usuario, { path: "/" })
+          cookies.set('apellido_usuario', data[0].apellido_usuario, { path: "/" })
+          cookies.set('foto_usuario', data[0].foto_usuario, { path: "/" })
           switch (info.rol) {
             case 'ESTUDIANTE':
               history.push("/student-board/")
@@ -247,10 +250,9 @@ const Form=(props)=>{
     return (    
       <div className="container border form-color p-3">
         <form onSubmit={handleSubmit(fSend)} className="col-md-10 mx-auto align-self-center">
-          {inputMaker(camps,inTypes,arrEr,vals,errMes)}  
-          {/* <Redirect to='/student-board'>       */}
+          {inputMaker(camps,inTypes,arrEr,vals,errMes)}
             <button type="submit" className="btn btn-color col-md-12 mt-5">{btnText}</button>
-          {/* </Redirect> */}
+          
         </form>
       </div>
       );
