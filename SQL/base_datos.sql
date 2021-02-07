@@ -12,14 +12,9 @@
  Target Server Version : 130000
  File Encoding         : 65001
 
- Date: 06/02/2021 19:13:02
+ Date: 06/02/2021 19:48:48
 */
 
--- ----------------------------
--- Base de datos
--- ----------------------------
-CREATE DATABASE academia_geek;
-USE academia_geek;
 
 -- ----------------------------
 -- Type structure for correo_validado
@@ -353,12 +348,8 @@ CREATE TABLE "public"."ultimo_usuario" (
 -- ----------------------------
 ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
 OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
+SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, true);
 
-
-ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
-OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
@@ -366,10 +357,6 @@ ALTER SEQUENCE "public"."docentes_id_docente_seq"
 OWNED BY "public"."docentes"."id_docente";
 SELECT setval('"public"."docentes_id_docente_seq"', 3, true);
 
-
-ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
-OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
@@ -382,7 +369,7 @@ SELECT setval('"public"."estudiantes_grupos_id_estudiantes_grupos_seq"', 3, true
 -- ----------------------------
 ALTER SEQUENCE "public"."estudiantes_id_estudiante_seq"
 OWNED BY "public"."estudiantes"."id_estudiante";
-SELECT setval('"public"."estudiantes_id_estudiante_seq"', 5, true);
+SELECT setval('"public"."estudiantes_id_estudiante_seq"', 7, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -398,10 +385,6 @@ ALTER SEQUENCE "public"."historial_id_historial_seq"
 OWNED BY "public"."historial"."id_historial";
 SELECT setval('"public"."historial_id_historial_seq"', 5, true);
 
-
-ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
-OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
