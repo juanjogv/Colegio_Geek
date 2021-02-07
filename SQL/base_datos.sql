@@ -12,11 +12,10 @@
  Target Server Version : 120004
  File Encoding         : 65001
 
- Date: 04/02/2021 11:15:28
+ Date: 06/02/2021 19:00:31
 */
 
-CREATE DATABASE academia_geek;
-USE academia_geek;
+
 -- ----------------------------
 -- Type structure for correo_validado
 -- ----------------------------
@@ -205,10 +204,6 @@ CREATE TABLE "public"."administrativos" (
 ;
 
 -- ----------------------------
--- Records of administrativos
--- ----------------------------
-
--- ----------------------------
 -- Table structure for docentes
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."docentes";
@@ -233,11 +228,6 @@ CREATE TABLE "public"."docentes" (
 ;
 
 -- ----------------------------
--- Records of docentes
--- ----------------------------
-INSERT INTO "public"."docentes" VALUES (1, '123', 'CC', '12345', 'javier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
--- ----------------------------
 -- Table structure for estudiantes
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."estudiantes";
@@ -255,17 +245,11 @@ CREATE TABLE "public"."estudiantes" (
   "telefono_residencia" varchar(20) COLLATE "pg_catalog"."default",
   "correo_electronico" varchar(30) COLLATE "pg_catalog"."default",
   "telefono_celular" varchar(20) COLLATE "pg_catalog"."default",
-  "foto_estudiante" varchar(500) COLLATE "pg_catalog"."default",
+  "foto_usuario" varchar(500) COLLATE "pg_catalog"."default",
   "copia_documento" varchar(500) COLLATE "pg_catalog"."default",
-  "pass_usuario" varchar(300) COLLATE "pg_catalog"."default",
-  "id_grupo" int8 NOT NULL
+  "pass_usuario" varchar(300) COLLATE "pg_catalog"."default"
 )
 ;
-
--- ----------------------------
--- Records of estudiantes
--- ----------------------------
-INSERT INTO "public"."estudiantes" VALUES (1, NULL, NULL, NULL, 'juan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for estudiantes_grupos
@@ -279,11 +263,6 @@ CREATE TABLE "public"."estudiantes_grupos" (
 ;
 
 -- ----------------------------
--- Records of estudiantes_grupos
--- ----------------------------
-INSERT INTO "public"."estudiantes_grupos" VALUES (1, 1, 1);
-
--- ----------------------------
 -- Table structure for grupos
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."grupos";
@@ -291,16 +270,10 @@ CREATE TABLE "public"."grupos" (
   "id_grupo" int4 NOT NULL DEFAULT nextval('grupos_id_grupo_seq'::regclass),
   "codigo_grupo" varchar(10) COLLATE "pg_catalog"."default",
   "jornada" "public"."jornada",
-  "id_profesor" int8 NOT NULL
+  "id_profesor" int8 NOT NULL,
+  "grado" varchar(255) COLLATE "pg_catalog"."default"
 )
 ;
-
--- ----------------------------
--- Records of grupos
--- ----------------------------
-INSERT INTO "public"."grupos" VALUES (1, '111', 'mañana', 1);
-INSERT INTO "public"."grupos" VALUES (2, '20201', 'mañana', 1);
-INSERT INTO "public"."grupos" VALUES (3, '20201', 'mañana', 1);
 
 -- ----------------------------
 -- Table structure for historial
@@ -318,12 +291,6 @@ CREATE TABLE "public"."historial" (
 ;
 
 -- ----------------------------
--- Records of historial
--- ----------------------------
-INSERT INTO "public"."historial" VALUES (1, '2020123', '2013', '8', '1', '2', 1);
-INSERT INTO "public"."historial" VALUES (3, NULL, '2013', '8', '1', '2', 1);
-
--- ----------------------------
 -- Table structure for materias
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."materias";
@@ -336,16 +303,9 @@ CREATE TABLE "public"."materias" (
   "octavo" int2,
   "noveno" int2,
   "decimo" int2,
-  "once" int2,
-  "id_grupo" int8 NOT NULL
+  "once" int2
 )
 ;
-
--- ----------------------------
--- Records of materias
--- ----------------------------
-INSERT INTO "public"."materias" VALUES (1, '2020', 'matematicas', 0, 0, 0, 0, NULL, 1, 1);
-INSERT INTO "public"."materias" VALUES (2, '2020', 'matematicas', 0, 0, 0, 0, NULL, 1, 1);
 
 -- ----------------------------
 -- Table structure for notas
@@ -358,12 +318,6 @@ CREATE TABLE "public"."notas" (
   "id_estudiante" int8 NOT NULL
 )
 ;
-
--- ----------------------------
--- Records of notas
--- ----------------------------
-INSERT INTO "public"."notas" VALUES (2, '2', 1, 1);
-INSERT INTO "public"."notas" VALUES (3, '2', 1, 1);
 
 -- ----------------------------
 -- Table structure for planes_evaluacion
@@ -379,14 +333,6 @@ CREATE TABLE "public"."planes_evaluacion" (
 ;
 
 -- ----------------------------
--- Records of planes_evaluacion
--- ----------------------------
-INSERT INTO "public"."planes_evaluacion" VALUES (1, 2, 'plan 1', 1, 1);
-INSERT INTO "public"."planes_evaluacion" VALUES (2, 2, 'plan 1', 1, 1);
-INSERT INTO "public"."planes_evaluacion" VALUES (3, 2, 'plan 1', 1, 1);
-INSERT INTO "public"."planes_evaluacion" VALUES (4, 2, 'plan 1', 1, 1);
-
--- ----------------------------
 -- Table structure for ultimo_usuario
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."ultimo_usuario";
@@ -397,23 +343,18 @@ CREATE TABLE "public"."ultimo_usuario" (
 ;
 
 -- ----------------------------
--- Records of ultimo_usuario
--- ----------------------------
-INSERT INTO "public"."ultimo_usuario" VALUES ('2021', 157);
-
--- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
 OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 2, false);
+SELECT setval('"public"."administrativos_id_administrativo_seq"', 2, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."docentes_id_docente_seq"
 OWNED BY "public"."docentes"."id_docente";
-SELECT setval('"public"."docentes_id_docente_seq"', 2, false);
+SELECT setval('"public"."docentes_id_docente_seq"', 3, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -427,7 +368,7 @@ SELECT setval('"public"."estudiantes_grupos_id_estudiantes_grupos_seq"', 2, true
 -- ----------------------------
 ALTER SEQUENCE "public"."estudiantes_id_estudiante_seq"
 OWNED BY "public"."estudiantes"."id_estudiante";
-SELECT setval('"public"."estudiantes_id_estudiante_seq"', 2, true);
+SELECT setval('"public"."estudiantes_id_estudiante_seq"', 32, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -465,14 +406,29 @@ OWNED BY "public"."planes_evaluacion"."id_plan";
 SELECT setval('"public"."planes_evaluacion_id_plan_seq"', 5, true);
 
 -- ----------------------------
+-- Uniques structure for table administrativos
+-- ----------------------------
+ALTER TABLE "public"."administrativos" ADD CONSTRAINT "uq_administrativo" UNIQUE ("correo_electronico");
+
+-- ----------------------------
 -- Primary Key structure for table administrativos
 -- ----------------------------
 ALTER TABLE "public"."administrativos" ADD CONSTRAINT "administrativos_pkey" PRIMARY KEY ("id_administrativo");
 
 -- ----------------------------
+-- Uniques structure for table docentes
+-- ----------------------------
+ALTER TABLE "public"."docentes" ADD CONSTRAINT "uq_docentes" UNIQUE ("correo_electronico");
+
+-- ----------------------------
 -- Primary Key structure for table docentes
 -- ----------------------------
 ALTER TABLE "public"."docentes" ADD CONSTRAINT "docentes_pkey" PRIMARY KEY ("id_docente");
+
+-- ----------------------------
+-- Uniques structure for table estudiantes
+-- ----------------------------
+ALTER TABLE "public"."estudiantes" ADD CONSTRAINT "uq_estudiante" UNIQUE ("correo_electronico");
 
 -- ----------------------------
 -- Primary Key structure for table estudiantes
@@ -505,11 +461,6 @@ ALTER TABLE "public"."notas" ADD CONSTRAINT "notas_pkey" PRIMARY KEY ("id_nota")
 ALTER TABLE "public"."planes_evaluacion" ADD CONSTRAINT "planes_evaluacion_pkey" PRIMARY KEY ("id_plan");
 
 -- ----------------------------
--- Foreign Keys structure for table estudiantes
--- ----------------------------
-ALTER TABLE "public"."estudiantes" ADD CONSTRAINT "fk_grupo" FOREIGN KEY ("id_grupo") REFERENCES "public"."grupos" ("id_grupo") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
 -- Foreign Keys structure for table estudiantes_grupos
 -- ----------------------------
 ALTER TABLE "public"."estudiantes_grupos" ADD CONSTRAINT "fk_estudiantes_g" FOREIGN KEY ("id_estudiante") REFERENCES "public"."estudiantes" ("id_estudiante") ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -524,11 +475,6 @@ ALTER TABLE "public"."grupos" ADD CONSTRAINT "fk_profesores" FOREIGN KEY ("id_pr
 -- Foreign Keys structure for table historial
 -- ----------------------------
 ALTER TABLE "public"."historial" ADD CONSTRAINT "fk_codigo" FOREIGN KEY ("id_estudiante") REFERENCES "public"."estudiantes" ("id_estudiante") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- ----------------------------
--- Foreign Keys structure for table materias
--- ----------------------------
-ALTER TABLE "public"."materias" ADD CONSTRAINT "fk_grupos_materias" FOREIGN KEY ("id_grupo") REFERENCES "public"."grupos" ("id_grupo") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table notas
