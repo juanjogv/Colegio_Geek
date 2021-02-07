@@ -4,9 +4,10 @@ import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
+
 
 const Form=(props)=>{
+  const cookies = new Cookies();
   const {page,camps,inTypes,btnText,vals,errMes,endpoint,id} = props;
   let arrEr=[];
   const { register,errors, handleSubmit } = useForm();
@@ -37,9 +38,11 @@ const Form=(props)=>{
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         if (data[1].validPass===true){
           console.log(info.rol)
-          cookies.set('nombre_usuario', data[0].nombre_usuario, { path: "/" })
-          cookies.set('apellido_usuario', data[0].apellido_usuario, { path: "/" })
-          cookies.set('foto_usuario', data[0].foto_usuario, { path: "/" })
+          cookies.set("nombre_usuario", data[0].nombre_usuario, { path: "/" })
+          cookies.set("apellido_usuario", data[0].apellido_usuario, { path: "/" })
+          cookies.set("correo_electronico", data[0].correo_electronico, { path: "/" })
+          cookies.set("foto_usuario", data[0].foto_usuario, { path: "/" })
+          cookies.set("rol_usuario", info.rol, { path: "/" })
           switch (info.rol) {
             case 'ESTUDIANTE':
               history.push("/student-board/")
@@ -54,7 +57,9 @@ const Form=(props)=>{
         }
       }
       
-      else if(endpoint !=='/signin' && endpoint !=='/login'){
+      else if(endpoint ==='/password'){
+        info.correo_electronico=cookies.get('correo_electronico');
+        info.rol=cookies.get('rol_usuario');
         const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);
         if(data!=undefined){
           if(endpoint==='/password' && info.contrasena===info.repetir){
@@ -62,6 +67,10 @@ const Form=(props)=>{
           }else if(endpoint==='/password' && info.contrasena!==info.repetir){
             alert('Verifique que los campos ingresados sean iguales');
           }
+        }
+
+      else if(endpoint !=='/signin' && endpoint !=='/login' && endpoint !=='/password'){
+        const {data}=await Axios.post(`http://localhost:8080${endpoint}`,info);        
         }
         console.log(data);
       }

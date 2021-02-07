@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 import NavMenu from "../components/NavMenu";
 import Dashboard from "../components/Dashboard";
 
 
 const AdminBoard=({children})=>{
+  const cookies = new Cookies();
+  const [profile,setProfile]=useState({});
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
   const urlText=['Inicio','Grupos','Matricular Grupos','Registrar Usuarios','Materias','Cambiar clave'];
@@ -22,7 +23,7 @@ const AdminBoard=({children})=>{
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
-
+  
   return (
     <div className="row h-100 m-0 justify-content-center">
       <div className={`p-0 ${toggled ? 'toggled' : ''} col-1 col-md-2`} id='board'>

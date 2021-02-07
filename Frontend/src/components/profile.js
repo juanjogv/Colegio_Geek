@@ -1,19 +1,27 @@
 import React, {useState,useEffect} from "react";
 import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
-
 const Profile =({handleToggleSidebar})=>{
   
   const [profile,setProfile]=useState({});
+  const [loading,setLoading] = useState (true);
+  const cookies = new Cookies();
+
 
   useEffect(() => {
-    const setProfile=({
-      nombre_usuario: cookies.get('nombre_usuario'),
-      apellido_usuario: cookies.get('apellido_usuario'),
-      foto_usuario: cookies.get('foto_usuario')
+    const getData=()=>{
+      setProfile({
+        nombre_usuario: cookies.get('nombre_usuario'),
+        apellido_usuario: cookies.get('apellido_usuario'),
+        foto_usuario: cookies.get('foto_usuario'),
+        rol_usuario: cookies.get('rol_usuario')
       });
-  });
+    }
+    if(loading){
+      getData();
+      setLoading(false);
+    }    
+  },[]);
 
   console.log(profile);
   return (   
