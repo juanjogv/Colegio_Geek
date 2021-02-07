@@ -12,7 +12,7 @@
  Target Server Version : 130000
  File Encoding         : 65001
 
- Date: 06/02/2021 19:13:02
+ Date: 06/02/2021 19:48:48
 */
 
 
@@ -348,7 +348,7 @@ CREATE TABLE "public"."ultimo_usuario" (
 -- ----------------------------
 ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
 OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
+SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -369,7 +369,7 @@ SELECT setval('"public"."estudiantes_grupos_id_estudiantes_grupos_seq"', 3, true
 -- ----------------------------
 ALTER SEQUENCE "public"."estudiantes_id_estudiante_seq"
 OWNED BY "public"."estudiantes"."id_estudiante";
-SELECT setval('"public"."estudiantes_id_estudiante_seq"', 5, true);
+SELECT setval('"public"."estudiantes_id_estudiante_seq"', 7, true);
 
 -- ----------------------------
 -- Alter sequences owned by
