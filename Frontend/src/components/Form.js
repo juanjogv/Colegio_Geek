@@ -75,6 +75,7 @@ const Form=(props)=>{
     formData.append("file", file);
     let res=''
     try {
+      console.log(`${urlBack}/imageupload/`)
      res = await Axios.post(`${urlBack}/imageupload/`,formData); 
            
     }catch (error) {
