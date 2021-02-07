@@ -1,18 +1,18 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : AWSRDS
+ Source Server         : GCP
  Source Server Type    : PostgreSQL
- Source Server Version : 120004
- Source Host           : postgreinstance.c3jkemwvwcuj.us-east-2.rds.amazonaws.com:5432
+ Source Server Version : 130000
+ Source Host           : 34.73.252.40:5432
  Source Catalog        : academia_geek
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
- Target Server Version : 120004
+ Target Server Version : 130000
  File Encoding         : 65001
 
- Date: 06/02/2021 19:00:31
+ Date: 06/02/2021 19:13:02
 */
 
 
@@ -258,7 +258,7 @@ DROP TABLE IF EXISTS "public"."estudiantes_grupos";
 CREATE TABLE "public"."estudiantes_grupos" (
   "id_estudiantes_grupos" int4 NOT NULL DEFAULT nextval('estudiantes_grupos_id_estudiantes_grupos_seq'::regclass),
   "id_estudiante" int8,
-  "id_grupos" int8
+  "id_grupo" int8
 )
 ;
 
@@ -298,12 +298,13 @@ CREATE TABLE "public"."materias" (
   "id_materia" int4 NOT NULL DEFAULT nextval('materias_id_materia_seq'::regclass),
   "codigo_materia" varchar(10) COLLATE "pg_catalog"."default",
   "nombre_materia" varchar(20) COLLATE "pg_catalog"."default",
-  "sexto" int2,
-  "septimo" int2,
-  "octavo" int2,
-  "noveno" int2,
-  "decimo" int2,
-  "once" int2
+  "id_profesor" int8,
+  "sexto" bool DEFAULT false,
+  "septimo" bool DEFAULT false,
+  "octavo" bool DEFAULT false,
+  "noveno" bool DEFAULT false,
+  "decimo" bool DEFAULT false,
+  "once" bool DEFAULT false
 )
 ;
 
@@ -347,7 +348,7 @@ CREATE TABLE "public"."ultimo_usuario" (
 -- ----------------------------
 ALTER SEQUENCE "public"."administrativos_id_administrativo_seq"
 OWNED BY "public"."administrativos"."id_administrativo";
-SELECT setval('"public"."administrativos_id_administrativo_seq"', 2, true);
+SELECT setval('"public"."administrativos_id_administrativo_seq"', 3, false);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -361,54 +362,54 @@ SELECT setval('"public"."docentes_id_docente_seq"', 3, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."estudiantes_grupos_id_estudiantes_grupos_seq"
 OWNED BY "public"."estudiantes_grupos"."id_estudiantes_grupos";
-SELECT setval('"public"."estudiantes_grupos_id_estudiantes_grupos_seq"', 2, true);
+SELECT setval('"public"."estudiantes_grupos_id_estudiantes_grupos_seq"', 3, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."estudiantes_id_estudiante_seq"
 OWNED BY "public"."estudiantes"."id_estudiante";
-SELECT setval('"public"."estudiantes_id_estudiante_seq"', 32, true);
+SELECT setval('"public"."estudiantes_id_estudiante_seq"', 5, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."grupos_id_grupo_seq"
 OWNED BY "public"."grupos"."id_grupo";
-SELECT setval('"public"."grupos_id_grupo_seq"', 4, true);
+SELECT setval('"public"."grupos_id_grupo_seq"', 13, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."historial_id_historial_seq"
 OWNED BY "public"."historial"."id_historial";
-SELECT setval('"public"."historial_id_historial_seq"', 4, true);
+SELECT setval('"public"."historial_id_historial_seq"', 5, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."materias_id_materia_seq"
 OWNED BY "public"."materias"."id_materia";
-SELECT setval('"public"."materias_id_materia_seq"', 3, true);
+SELECT setval('"public"."materias_id_materia_seq"', 6, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."notas_id_nota_seq"
 OWNED BY "public"."notas"."id_nota";
-SELECT setval('"public"."notas_id_nota_seq"', 4, true);
+SELECT setval('"public"."notas_id_nota_seq"', 5, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."planes_evaluacion_id_plan_seq"
 OWNED BY "public"."planes_evaluacion"."id_plan";
-SELECT setval('"public"."planes_evaluacion_id_plan_seq"', 5, true);
+SELECT setval('"public"."planes_evaluacion_id_plan_seq"', 6, true);
 
 -- ----------------------------
 -- Uniques structure for table administrativos
 -- ----------------------------
-ALTER TABLE "public"."administrativos" ADD CONSTRAINT "uq_administrativo" UNIQUE ("correo_electronico");
+ALTER TABLE "public"."administrativos" ADD CONSTRAINT "uq_administrat" UNIQUE ("correo_electronico");
 
 -- ----------------------------
 -- Primary Key structure for table administrativos
@@ -418,7 +419,7 @@ ALTER TABLE "public"."administrativos" ADD CONSTRAINT "administrativos_pkey" PRI
 -- ----------------------------
 -- Uniques structure for table docentes
 -- ----------------------------
-ALTER TABLE "public"."docentes" ADD CONSTRAINT "uq_docentes" UNIQUE ("correo_electronico");
+ALTER TABLE "public"."docentes" ADD CONSTRAINT "uq_administrativo" UNIQUE ("correo_electronico");
 
 -- ----------------------------
 -- Primary Key structure for table docentes
@@ -428,7 +429,7 @@ ALTER TABLE "public"."docentes" ADD CONSTRAINT "docentes_pkey" PRIMARY KEY ("id_
 -- ----------------------------
 -- Uniques structure for table estudiantes
 -- ----------------------------
-ALTER TABLE "public"."estudiantes" ADD CONSTRAINT "uq_estudiante" UNIQUE ("correo_electronico");
+ALTER TABLE "public"."estudiantes" ADD CONSTRAINT "uq_administrativ" UNIQUE ("correo_electronico");
 
 -- ----------------------------
 -- Primary Key structure for table estudiantes
@@ -464,7 +465,7 @@ ALTER TABLE "public"."planes_evaluacion" ADD CONSTRAINT "planes_evaluacion_pkey"
 -- Foreign Keys structure for table estudiantes_grupos
 -- ----------------------------
 ALTER TABLE "public"."estudiantes_grupos" ADD CONSTRAINT "fk_estudiantes_g" FOREIGN KEY ("id_estudiante") REFERENCES "public"."estudiantes" ("id_estudiante") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."estudiantes_grupos" ADD CONSTRAINT "fk_grupos_e" FOREIGN KEY ("id_grupos") REFERENCES "public"."grupos" ("id_grupo") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."estudiantes_grupos" ADD CONSTRAINT "fk_grupos_e" FOREIGN KEY ("id_grupo") REFERENCES "public"."grupos" ("id_grupo") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table grupos
