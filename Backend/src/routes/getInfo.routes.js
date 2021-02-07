@@ -23,5 +23,15 @@ router.get('/groups', async (req, res) => {
     res.json(rows);
     });
 
+  router.get('/students-notas',async(req,res)=>{
+    const {rows} = await pool.query(format(`SELECT estudiantes.id_estudiante, nombre_usuario, apellido_usuario, notas.valor 
+                                            FROM estudiantes 
+                                            LEFT JOIN notas 
+                                            ON estudiantes.id_estudiante = notas.id_estudiante
+                                            ORDER BY estudiantes.id_estudiante;`));
+    res.json(rows);
+    console.log(rows)
+  })
+
 
 module.exports = router;
