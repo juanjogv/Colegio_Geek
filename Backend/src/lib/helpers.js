@@ -69,7 +69,7 @@ helpers.sendMail = (full_name, email, pass) => {
                                     <tr>
                                         <td align="left" style="line-height:1em;text-align:left" valign="middle"><img
                                                 style="border-top-style:none;border-left-style:none;border-bottom-style:none;border-right-style:none;display:block;outline:none"
-                                                title="Google for Education" width="200" class="CToWUd"></td>
+                                                title="" width="200" class="CToWUd"></td>
                                     </tr>
                                 </tbody>
                             </table>
