@@ -68,8 +68,6 @@ helpers.sendMail = (full_name, email, pass) => {
                                 <tbody>
                                     <tr>
                                         <td align="left" style="line-height:1em;text-align:left" valign="middle"><img
-                                                alt="Indeportes Antioquia" border="0"
-                                                src="http://35.227.16.4:5000/static/media/logo-indeportes.4416d0fc.png"
                                                 style="border-top-style:none;border-left-style:none;border-bottom-style:none;border-right-style:none;display:block;outline:none"
                                                 title="Google for Education" width="200" class="CToWUd"></td>
                                     </tr>
