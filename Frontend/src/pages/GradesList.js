@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import Table from "../components/Table";
 import logo from "../images/logo.png";
 const cookies = new Cookies();
-const ScoreEstudents = () => {
+const GradesList = () => {
     const [loading, setLoading] = useState(false);
     const [studentList, setStudentList] = useState([]);
     const [listColumns, setListColumns] = useState([]);
@@ -18,7 +18,7 @@ const ScoreEstudents = () => {
         setLoading(true);
         const getData = async () => {
             try {
-                const { data } = await Axios.get(`${urlBack}/score-student/${cookies.get('id_usuario')}`);
+                const { data } = await Axios.get(`${urlBack}/students-notas/${cookies.get('id_usuario')}`);
                 setStudentList(data);
                 return (data[0]);
             } catch (error) {
@@ -66,4 +66,4 @@ const ScoreEstudents = () => {
     );
 }
 
-export default ScoreEstudents;
+export default GradesList;

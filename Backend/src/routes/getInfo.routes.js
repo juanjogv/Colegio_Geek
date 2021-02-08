@@ -30,9 +30,10 @@ router.get('/score-student/:id_estudiante', async (req, res) => {
   res.json(rows);
 });
 
-router.get('/students-notas', async (req, res) => {
-  const { rows } = await pool.query(format(`SELECT materias.nombre_materia AS materia, materias.codigo_materia AS cod, nota1, nota2, nota3, nota4, nota5, (nota1 + nota2 + nota3 + nota4 + nota5)/5 AS promedio
-    FROM notas INNER JOIN  materias ON notas.id_materia = materias.id_materia where notas.id_estudiante = 1`));
+router.get('/students-notas/:id_docente', async (req, res) => {
+  const { id_docente } = req.params;
+  const { rows } = await pool.query(format(`SELECT estudiantes.documento_usuario AS documento_estudiante, concat(estudiantes.nombre_usuario, ' ', estudiantes.apellido_usuario) AS Nombre_estudiante, nota1, nota2, nota3, nota4, nota5, ROUND((nota1 + nota2 + nota3 + nota4 + nota5)/5) AS promedio
+  FROM notas INNER JOIN estudiantes ON estudiantes.id_estudiante = notas.id_estudiante INNER JOIN  materias ON notas.id_materia = materias.id_materia where materias.id_docente = '${id_docente}'`));
   res.json(rows);
   console.log(rows)
 })

@@ -34,6 +34,8 @@ const NavMenu=({collapsed,toggled,handleToggleSidebar,links,tLinks})=>{
     cookies.remove("correo_electronico")
     cookies.remove("foto_usuario")
     cookies.remove("rol_usuario")  
+    cookies.remove("codigo_usuario")  
+    cookies.remove("id_usuario")  
     setStatus(true);   
   }
   if(status){

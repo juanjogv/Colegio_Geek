@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 
 const Form = (props) => {
   const cookies = new Cookies();
-  const { page, camps, inTypes, btnText, vals, errMes, endpoint, id } = props;
+  const { page, camps, inTypes, btnText, vals, errMes, endpoint } = props;
   const urlBack = 'http://35.237.174.137:8080'
   let arrEr = [];
   const { register, errors, handleSubmit } = useForm();

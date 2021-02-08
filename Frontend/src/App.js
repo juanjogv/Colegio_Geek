@@ -5,16 +5,17 @@ import { AnimatedSwitch, AnimatedRoute } from "react-router-transition";
 
 import Particles from "./Canvas";
 import Login from "./pages/Login";
-import Profile from './components/profile'
+import Profile from './components/Profile'
 import AdminBoard from "./pages/AdminBoard";
 import UserRegister from "./pages/UserRegister";
 import GroupRegister from "./pages/GroupRegister";
 import EnrollStudents from "./pages/EnrollStudents";
-import ScoreStudents from "./pages/ScoreStudents";
 import SubjectRegister from "./pages/SubjectRegister";
 import ChangePassword from "./pages/ChangePassword";
 import StudentBoard from "./pages/StudentBoard";
+import ScoreStudents from "./pages/ScoreStudents";
 import TeacherBoard from "./pages/TeacherBoard";
+import GradesList from "./pages/GradesList";
 
 import './css/App.scss';
 
@@ -73,10 +74,19 @@ const App = () => {
                 atLeave={{ opacity: 1 }}
                 atActive={{ opacity: 1 }}
               />
+              <AnimatedRoute path="/teacher-board/grades/" component={GradesList}
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1 }}
+                atActive={{ opacity: 1 }}
+              />
               {/* <Route exact path="/teacher-board/user-register" component={UserRegister}/>
               <Route exact path="/teacher-board/group-register" component={GroupRegister}/>
               <Route exact path="/teacher-board/subject-register" component={SubjectRegister}/> */}
-              <Route path="/teacher-board/change-password/" component={ChangePassword} />
+              <AnimatedRoute path="/teacher-board/change-password/" component={ChangePassword} 
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1 }}
+                atActive={{ opacity: 1 }}
+              />
             </TeacherBoard>
           </Route>
           <Route exact path="/student-board/:path?">
@@ -95,7 +105,11 @@ const App = () => {
               {/* <Route exact path="/student-board/user-register" component={UserRegister}/>
               <Route exact path="/student-board/group-register" component={GroupRegister}/>
               <Route exact path="/student-board/subject-register" component={SubjectRegister}/> */}
-              <Route path="/student-board/change-password/" component={ChangePassword} />
+              <AnimatedRoute path="/student-board/change-password/" component={ChangePassword} 
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1 }}
+                atActive={{ opacity: 1 }}
+              />
             </StudentBoard>
           </Route>
         </AnimatedSwitch>

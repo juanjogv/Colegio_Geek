@@ -4,8 +4,6 @@ import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useTable, useRowSelect, useGlobalFilter, usePagination,  } from 'react-table'
 import Cookies from 'universal-cookie';
 
-import MOCK_DATA from './MOCK_DATA.json'
-import { COLUMNS } from './columns'
 import '../css/table.scss'
 import { Checkbox } from './Checkbox'
 import { GlobalFilter } from './GlobalFilter'

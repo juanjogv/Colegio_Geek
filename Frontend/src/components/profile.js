@@ -32,10 +32,8 @@ const Profile =({handleToggleSidebar})=>{
     <div className="col-lg-8 col-md-12 col-sm-12">
         <div className="card-style card">
             <div className="card-body">
-                <h2>Bienvenid@</h2>
-                <p>My full name is <b>Thinh Phan Ngoc</b>. I am a simple, creative, enthusiastic and fun-loving person.</p>
-                <p>My objective is constantly improving programming skills and understanding of technologies to become a professional front-end developer. </p>
-
+                <h2 className="font-weight-bold">Bienvenid@ {profile.nombre_usuario+' '+profile.apellido_usuario}</h2>
+                <p className='text-white'>My full name is <b>Thinh Phan Ngoc</b>. I am a simple, creative, enthusiastic and fun-loving person.</p>
             </div>
         </div>
     </div>
