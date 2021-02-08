@@ -10,6 +10,7 @@ const EnrollStudent=()=>{
   const [loading,setLoading] = useState (false);
   const [studentList, setStudentList]=useState([]);
   const [listColumns, setListColumns]=useState([]);
+  const [listEnroll, setListEnroll]=useState([]);
 
   const urlBack='http://35.237.174.137:8080'
   let cols=[];
@@ -55,6 +56,8 @@ const EnrollStudent=()=>{
       {!loading && <Table
           listRows={studentList}
           listColumns={listColumns}
+          setListEnroll={setListEnroll}
+          table='1'
           // page="4"
           // endpoint="/grupos"
           // method="post"
