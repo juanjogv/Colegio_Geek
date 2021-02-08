@@ -18,8 +18,8 @@ const ScoreEstudents = () => {
         setLoading(true);
         const getData = async () => {
             try {
-                const { data } = await Axios.get(`${urlBack}/score-student/${cookies.get('codigo_usuario')}`);
-                console.log(cookies.get('codigo_usuario'));
+                const { data } = await Axios.get(`${urlBack}/score-student/${cookies.get('id_usuario')}`);
+                console.log(cookies.get('id_usuario'));
                 setStudentList(data);
                 return (data[0]);
             } catch (error) {

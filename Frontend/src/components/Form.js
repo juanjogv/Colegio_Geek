@@ -38,7 +38,6 @@ const Form = (props) => {
         console.log(data);
         // cookies.set('correo_electronico', info.correo_electronico, { path: "/" });
         if (data[1].validPass === true) {
-          console.log(info.rol)
           cookies.set("nombre_usuario", data[0].nombre_usuario, { path: "/" })
           cookies.set("apellido_usuario", data[0].apellido_usuario, { path: "/" })
           cookies.set("correo_electronico", data[0].correo_electronico, { path: "/" })
@@ -47,12 +46,15 @@ const Form = (props) => {
           cookies.set("codigo_usuario", data[0].codigo_usuario, { path: "/" })
           switch (info.rol) {
             case 'ESTUDIANTE':
+              cookies.set("id_usuario", data[0].id_estudiante, { path: "/" })              
               history.push("/student-board/")
               break;
             case 'ADMINISTRATIVO':
+              cookies.set("id_usuario", data[0].id_administrativo, { path: "/" })
               history.push("/admin-board/")
               break;
             case 'DOCENTE':
+              cookies.set("id_usuario", data[0].id_docente, { path: "/" })
               history.push("/teacher-board/")
               break;
           }

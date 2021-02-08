@@ -23,11 +23,10 @@ router.get('/students-groups', async (req, res) => {
   res.json(rows);
 });
 
-router.get('/score-student/:codigo_usuario', async (req, res) => {
-  const { codigo_usuario } = req.params;
-  const { rows } = await pool.query(format(`SELECT m.nombre_materia, p.id_plan, n.valor, e.nombre_usuario, e.apellido_usuario
-  FROM planes_evaluacion p, materias m, estudiantes e, notas n
-  WHERE e.codigo_usuario = '${codigo_usuario}';`));
+router.get('/score-student/:id_estudiante', async (req, res) => {
+  const { id_estudiante } = req.params;
+  const { rows } = await pool.query(format(`SELECT materias.nombre_materia AS materia, materias.codigo_materia AS cod, nota1, nota2, nota3, nota4, nota5, (nota1 + nota2 + nota3 + nota4 + nota5)/5 AS promedio
+  FROM notas INNER JOIN  materias ON notas.id_materia = materias.id_materia where notas.id_estudiante = '${id_estudiante}';`));
   res.json(rows);
 });
 

@@ -10,7 +10,7 @@ import AdminBoard from "./pages/AdminBoard";
 import UserRegister from "./pages/UserRegister";
 import GroupRegister from "./pages/GroupRegister";
 import EnrollStudents from "./pages/EnrollStudents";
-import ScoreEstudents from "./pages/ScoreStudents";
+import ScoreStudents from "./pages/ScoreStudents";
 import SubjectRegister from "./pages/SubjectRegister";
 import ChangePassword from "./pages/ChangePassword";
 import StudentBoard from "./pages/StudentBoard";
@@ -64,11 +64,6 @@ const App = () => {
                 atLeave={{ opacity: 1 }}
                 atActive={{ opacity: 1 }}
               />
-              <AnimatedRoute path="/admin-board/enroll-students" component={EnrollStudents}
-                atEnter={{ opacity: 0 }}
-                atLeave={{ opacity: 1 }}
-                atActive={{ opacity: 1 }}
-              />
             </AdminBoard>
           </Route>
           <Route exact path="/teacher-board/:path?">
@@ -92,7 +87,7 @@ const App = () => {
                 atActive={{ opacity: 1 }}
               />
               
-              <AnimatedRoute path="/student-board/grades/" component={ScoreEstudents}
+              <AnimatedRoute path="/student-board/grades/" component={ScoreStudents}
                 atEnter={{ opacity: 0 }}
                 atLeave={{ opacity: 1 }}
                 atActive={{ opacity: 1 }}
