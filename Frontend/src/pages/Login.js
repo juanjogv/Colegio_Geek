@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 import Form from "../components/Form";
@@ -9,22 +9,22 @@ import Form from "../components/Form";
 import logo from "../images/logo.png";
 
 
-const Login=()=>{
+const Login = () => {
 
-  const [user_id,setUser_id]=useState('');
-  const [user_rol,setUser_rol]=useState('');
+  const [user_id, setUser_id] = useState('');
+  const [user_rol, setUser_rol] = useState('');
 
-  const camposInputs=[{correo_electronico:'Correo'},{contrasena_usuario:'Conatraseña'}];
-  const inputType=['text','password'];
-  const validation=[{required: true,pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/},{required: true}];
-  const errMessage=['Ingrese un correo valido','Ingrese contraseña'];
-  const userType={rol:['ESTUDIANTE','DOCENTE','ADMINISTRATIVO']};
+  const camposInputs = [{ correo_electronico: 'Correo' }, { contrasena_usuario: 'Conatraseña' }];
+  const inputType = ['text', 'password'];
+  const validation = [{ required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ }, { required: true }];
+  const errMessage = ['Ingrese un correo valido', 'Ingrese contraseña'];
+  const userType = { rol: ['ESTUDIANTE', 'DOCENTE', 'ADMINISTRATIVO'] };
   //   useEffect(() => {
-//     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
-//         // window.location.href = "../profile"
-//         console.log("No existe data");
-//     }
-// })
+  //     if (cookies.get('correo_electronico') ===null ||  cookies.get('correo_electronico')===undefined) {
+  //         // window.location.href = "../profile"
+  //         console.log("No existe data");
+  //     }
+  // })
 
   return (
     <div className="row align-items-center">
@@ -52,8 +52,8 @@ const Login=()=>{
           {/* <Link to='/register' className="col-6 btn-log ">
             Registrarme
           </Link> */}
-          </div>
-        </div>      
+        </div>
+      </div>
     </div>
   );
 }
