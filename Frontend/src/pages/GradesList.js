@@ -23,7 +23,7 @@ const GradesList = () => {
                 return (data[0]);
             } catch (error) {
                 console.log(error)
-                console.log(cookies.get('codigo_usuario'));
+                console.log(cookies.get('id_usuario'));
             }
         }
 
