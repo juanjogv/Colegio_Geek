@@ -69,11 +69,6 @@ const App = () => {
                 atLeave={{ opacity: 1 }}
                 atActive={{ opacity: 1 }}
               />
-              <AnimatedRoute path="/admin-board/score/" component={ScoreEstudents}
-                atEnter={{ opacity: 0 }}
-                atLeave={{ opacity: 1 }}
-                atActive={{ opacity: 1 }}
-              />
             </AdminBoard>
           </Route>
           <Route exact path="/teacher-board/:path?">
@@ -92,6 +87,12 @@ const App = () => {
           <Route exact path="/student-board/:path?">
             <StudentBoard>
               <AnimatedRoute exact path="/student-board/" component={Profile}
+                atEnter={{ opacity: 0 }}
+                atLeave={{ opacity: 1 }}
+                atActive={{ opacity: 1 }}
+              />
+              
+              <AnimatedRoute path="/student-board/grades/" component={ScoreEstudents}
                 atEnter={{ opacity: 0 }}
                 atLeave={{ opacity: 1 }}
                 atActive={{ opacity: 1 }}
