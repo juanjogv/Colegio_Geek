@@ -31,15 +31,12 @@ router.get('/score-student/:codigo_usuario', async (req, res) => {
   res.json(rows);
 });
 
-  router.get('/students-notas',async(req,res)=>{
-    const {rows} = await pool.query(format(`SELECT estudiantes.id_estudiante, nombre_usuario, apellido_usuario, notas.valor 
-                                            FROM estudiantes 
-                                            LEFT JOIN notas 
-                                            ON estudiantes.id_estudiante = notas.id_estudiante
-                                            ORDER BY estudiantes.id_estudiante;`));
-    res.json(rows);
-    console.log(rows)
-  })
+router.get('/students-notas', async (req, res) => {
+  const { rows } = await pool.query(format(`SELECT materias.nombre_materia AS materia, materias.codigo_materia AS cod, nota1, nota2, nota3, nota4, nota5, (nota1 + nota2 + nota3 + nota4 + nota5)/5 AS promedio
+    FROM notas INNER JOIN  materias ON notas.id_materia = materias.id_materia where notas.id_estudiante = 1`));
+  res.json(rows);
+  console.log(rows)
+})
 
 
 module.exports = router;
